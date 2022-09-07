@@ -27,6 +27,4 @@ const fetchResponseDetails = async movieID => {
   return moviesDetails;
 };
 
-
-
 export { fetchResponseTrend, fetchResponseSearch, fetchResponseDetails };
