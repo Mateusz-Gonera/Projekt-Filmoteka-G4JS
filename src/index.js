@@ -4,4 +4,3 @@ import { fetchResponse } from './js/fetchResponse';
 
 
 
-const perPage = 9;
