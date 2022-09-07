@@ -1,4 +1,6 @@
 @import '~node_modules/modern-normalize/modern-normalize.css';
+@import './variables';
+@import './container';
 
 body {
   font-family: $mainFont, "Roboto", sans-serif;
