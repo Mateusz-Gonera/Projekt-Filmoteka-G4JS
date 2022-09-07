@@ -1,3 +1,37 @@
 @import './common';
 @import './variables';
 @import './container';
+
+.header__container {
+    padding: 45px 0px;
+    width: 320px;
+    height: 230px;
+    background-image: url(../images/backgrounds/background320.png);
+    background-color: black;
+    color: $secondaryFontColor;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__item {
+        text-transform: uppercase;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 14px;
+    }
+}
+
+.searchBox {
+    color: $secondaryFontColor;
+    background-color: #00000000;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    width: 280px;
+    outline: none;
+    border: none;
+    border-bottom: 0.5px solid #FFFFFF;
+}
