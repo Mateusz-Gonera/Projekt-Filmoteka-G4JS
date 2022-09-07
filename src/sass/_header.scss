@@ -1,6 +1,4 @@
-@import './common';
-@import './variables';
-@import './container';
+
 
 .header__container {
     padding: 45px 0px;
@@ -13,7 +11,8 @@
 
 .nav {
     display: flex;
-    align-items: center;
+    flex-direction: column-reverse;
+    align-items: center;  
     justify-content: center;
 
     &__item {

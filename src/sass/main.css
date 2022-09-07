@@ -1,0 +1,99 @@
+body {
+  font-family: "Roboto", sans-serif, "Roboto", sans-serif;
+  color: #000000;
+  margin: 0 auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  list-style-type: none;
+}
+
+p {
+  padding: 0;
+  margin: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:visited {
+  color: inherit;
+}
+
+.container {
+  width: 100%;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 480px) {
+  .container {
+    max-width: 480px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 768px;
+    padding: 0 76px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+    padding: 0 71px;
+  }
+}
+.header__container {
+  padding: 45px 0px;
+  width: 320px;
+  height: 230px;
+  background-image: url(../images/backgrounds/background320.png);
+  background-color: black;
+  color: #FFFFFF;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: center;
+}
+.nav__item {
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.searchBox {
+  color: #FFFFFF;
+  background-color: rgba(0, 0, 0, 0);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  width: 280px;
+  outline: none;
+  border: none;
+  border-bottom: 0.5px solid #FFFFFF;
+}/*# sourceMappingURL=main.css.map */
