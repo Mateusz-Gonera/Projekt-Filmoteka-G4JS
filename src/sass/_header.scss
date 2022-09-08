@@ -1,18 +1,40 @@
-
-
-.header__container {
-    padding: 45px 0px;
-    width: 320px;
-    height: 230px;
-    background-image: url(../images/backgrounds/background320.png);
+header {
     background-color: black;
-    color: $secondaryFontColor;
+}
+
+.header {
+    &__container {
+        padding-top: 45px;
+        padding-bottom: 45px;
+        width: 320px;
+        height: 230px;
+        background-image: url(../images/backgrounds/background320.png);
+        background-color: black;
+        color: $secondaryFontColor;
+    }
+
+    &__logo-icon {
+        width: 24px;
+        height: 24px;
+        stroke: #818181;
+        transition: stroke $transitionEffect;
+
+        &:hover {
+            stroke: $mainColor;
+            cursor: pointer;
+        }
+    }
+
+    &__wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+    }
 }
 
 .nav {
     display: flex;
-    flex-direction: column-reverse;
-    align-items: center;  
+    align-items: center;
     justify-content: center;
 
     &__item {
@@ -20,17 +42,64 @@
         font-weight: 500;
         font-size: 12px;
         line-height: 14px;
+        transition: color $transitionEffect;
+
+        &:not(:first-child) {
+            margin-left: 40px;
+        }
+
+        &:hover,
+        :focus {
+            color: $mainColor;
+        }
+
     }
+
 }
 
-.searchBox {
-    color: $secondaryFontColor;
-    background-color: #00000000;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 16px;
-    width: 280px;
-    outline: none;
-    border: none;
-    border-bottom: 0.5px solid #FFFFFF;
+.search {
+    &__form{
+        margin-top:40px;
+    }
+    &__input {
+        position: relative;
+        color: $secondaryFontColor;
+        background-color: #00000000;
+        width: 280px;
+        border: none;
+        border-bottom: 0.5px solid #FFFFFF;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16px;
+        outline: none;
+
+        &::placeholder {
+            color: $secondaryFontColor;
+        }
+    }
+
+    &__button {
+        left: 260px;
+        bottom:20px;
+        
+        position:relative;
+        right: 50px;
+
+        background-color: transparent;
+        border: none;
+
+    }
+
+    &__icon {
+        width: 12px;
+        height: 12px;
+        stroke: $secondaryFontColor;
+        transition: stroke $transitionEffect;
+
+        :hover {
+            stroke: $mainColor;
+            cursor: pointer;
+        }
+    }
+
 }
