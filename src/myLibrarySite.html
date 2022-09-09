@@ -22,7 +22,27 @@
     <link rel="shortcut icon" href="favicon.ico" />
   </head>
   <body>
-
+    <header>
+      <div class="container header__container">
+        <ul class="nav nav--myLibrary">
+          <div class="logo">logo</div>
+          <li class="nav__item"><a href="" class="nav__link">Home</a></li>
+          <li class="nav__item"><a href="" class="nav__link">My Library</a></li>
+        </ul>
+        <button
+          type="submit"
+          id="watchedButton"
+          class="myLibrary__button myLibrary__button"
+        >
+          WATCHED
+        </button>
+        <button type="submit" id="queueButton" class="myLibrary__button">
+          QUEUE
+        </button>
+      </div>
+    </header>
+    <include src="./partials/mainSite.html"></include>
+    <include src="./partials/footer.html"></include>
     <include src="./partials/modal.html"></include>
     <script type="module" src="./index.js"></script>
   </body>
