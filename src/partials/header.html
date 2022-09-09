@@ -1,22 +1,25 @@
 <header>
-    <div class="header__container container  ">
+    <div class="container header__container   ">
         <div class="header__wrapper">
-        <div class="logo">
-            <svg class="header__logo-icon" width="24" height="24">
-            <use href="./images/logo.svg#icon-logo"></use>
-      </svg>
-    </div>
-        <ul class="nav">
-            <li class="nav__item"><a href="" class="nav__link">Home</a></li>
-            <li class="nav__item"><a href="" class="nav__link">My Library</a></li>
-        </ul>
+            <div class="logo">
+                <a href="index.html" class="logo__link">
+                    <svg class="logo__icon" width="24" height="24">
+                        <use href="./images/logo.svg#icon-logo"></use>
+                    </svg>
+                    <span class="logo__title">Filmoteka</span>
+                </a>
+            </div>
+            <ul class="nav">
+                <li class="nav__item"><a href="./index.html" class="nav__link active">Home</a></li>
+                <li class="nav__item"><a href="./myLibrarySite.html" class="nav__link">My Library</a></li>
+            </ul>
         </div>
         <form action="" class="search__form">
-        <input id="searchbox" name="searchBox-input" class="search__input" placeholder="Find the movie">
-        <button type="submit" class="search__button"><svg class="search__icon" width="12" height="12">
-            <use href="./images/search.svg#icon-search"></use>
-      </svg></button>
-       
+            <input id="searchbox" name="searchBox-input" class="search__input" placeholder="Find the movie">
+            <button type="submit" class="search__button"><svg class="search__icon" width="12" height="12">
+                    <use href="./images/search.svg#icon-search"></use>
+                </svg></button>
+
         </form>
         <span class="infoPlace"></span>
     </div>

@@ -43,7 +43,8 @@ a:visited {
 
 .container {
   width: 100%;
-  padding: 0 20px;
+  padding-left: 20px;
+  padding-right: 20px;
   margin: 0 auto;
 }
 
@@ -55,13 +56,15 @@ a:visited {
 @media screen and (min-width: 768px) {
   .container {
     max-width: 768px;
-    padding: 0 76px;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 }
 @media screen and (min-width: 1024px) {
   .container {
     max-width: 1024px;
-    padding: 0 20px;
+    padding-left: 71px;
+    padding-right: 71px;
   }
 }
 header {
@@ -77,15 +80,8 @@ header {
   background-color: black;
   color: #FFFFFF;
 }
-.header__logo-icon {
-  width: 24px;
-  height: 24px;
-  stroke: #818181;
-  transition: stroke 500ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-.header__logo-icon:hover {
-  stroke: #FF6B08;
-  cursor: pointer;
+.header__container--myLibrary {
+  background-image: url(../images/backgrounds/background320.png);
 }
 .header__wrapper {
   display: flex;
@@ -93,9 +89,22 @@ header {
   align-items: baseline;
 }
 
+.logo__title {
+  display: none;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 36px;
+  align-self: center;
+}
+.logo__icon {
+  width: 24px;
+  height: 24px;
+  stroke: #818181;
+}
+
 .nav {
   display: flex;
-  align-items: center;
+  align-items: start;
   justify-content: center;
 }
 .nav__item {
@@ -114,7 +123,9 @@ header {
 }
 
 .search__form {
-  margin-top: 40px;
+  display: flex;
+  margin: 40px auto auto;
+  justify-content: center;
 }
 .search__input {
   position: relative;
@@ -122,7 +133,7 @@ header {
   background-color: rgba(0, 0, 0, 0);
   width: 280px;
   border: none;
-  border-bottom: 0.5px solid #FFFFFF;
+  border-bottom: 0.1px solid #FFFFFF;
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
@@ -148,4 +159,60 @@ header {
 .search__icon :hover {
   stroke: #FF6B08;
   cursor: pointer;
+}
+
+.active::after {
+  display: block;
+  content: "";
+  width: inherit;
+  height: 3px;
+  background-color: #FF6B08;
+}
+
+@media screen and (min-width: 1024px) {
+  .header__container {
+    width: auto;
+    max-width: 1024px;
+    background-image: url(../images/backgrounds/background1024.png);
+  }
+  .header__container--myLibrary {
+    background-image: url(../images/backgrounds/background1024myLibrary.png);
+  }
+  .logo__title {
+    display: inline-block;
+  }
+  .search__input {
+    width: 340px;
+  }
+  .search__button {
+    left: -20px;
+    bottom: 0px;
+  }
+}
+.myLibrary__wrapper {
+  margin-top: 46px;
+  display: flex;
+  justify-content: space-between;
+}
+.myLibrary__button {
+  color: #FFFFFF;
+  background-color: transparent;
+  width: 136px;
+  height: 44px;
+  border-radius: 5px;
+  border-color: white;
+  border-style: solid;
+  cursor: pointer;
+}
+.myLibrary__button:hover {
+  border-color: #FF6B08;
+}
+
+@media screen and (min-width: 768px) {
+  .myLibrary__wrapper {
+    justify-content: center;
+  }
+  .myLibrary__button:first-child {
+    margin-right: 15px;
+  }
 }/*# sourceMappingURL=main.css.map */

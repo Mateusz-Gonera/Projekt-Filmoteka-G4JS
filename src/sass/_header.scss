@@ -11,19 +11,12 @@ header {
         background-image: url(../images/backgrounds/background320.png);
         background-color: black;
         color: $secondaryFontColor;
-    }
 
-    &__logo-icon {
-        width: 24px;
-        height: 24px;
-        stroke: #818181;
-        transition: stroke $transitionEffect;
-
-        &:hover {
-            stroke: $mainColor;
-            cursor: pointer;
+        &--myLibrary {
+            background-image: url(../images/backgrounds/background320.png)
         }
     }
+
 
     &__wrapper {
         display: flex;
@@ -32,9 +25,29 @@ header {
     }
 }
 
+.logo {
+    &__title {
+        display: none;
+        font-weight: 500;
+        font-size: 30px;
+        line-height: 36px;
+        align-self: center;
+    }
+
+    &__icon {
+        width: 24px;
+        height: 24px;
+        stroke: #818181;
+
+
+
+    }
+
+}
+
 .nav {
     display: flex;
-    align-items: center;
+    align-items: start;
     justify-content: center;
 
     &__item {
@@ -58,16 +71,19 @@ header {
 }
 
 .search {
-    &__form{
-        margin-top:40px;
+    &__form {
+        display: flex;
+        margin: 40px auto auto;
+        justify-content: center;
     }
+
     &__input {
         position: relative;
         color: $secondaryFontColor;
         background-color: #00000000;
         width: 280px;
         border: none;
-        border-bottom: 0.5px solid #FFFFFF;
+        border-bottom: 0.1px solid #FFFFFF;
         font-weight: 400;
         font-size: 14px;
         line-height: 16px;
@@ -80,9 +96,9 @@ header {
 
     &__button {
         left: 260px;
-        bottom:20px;
-        
-        position:relative;
+        bottom: 20px;
+
+        position: relative;
         right: 50px;
 
         background-color: transparent;
@@ -102,4 +118,50 @@ header {
         }
     }
 
+}
+
+.active {
+    &::after {
+
+        display: block;
+        content: "";
+        width: inherit;
+        height: 3px;
+        background-color: $mainColor;
+
+    }
+}
+
+@media screen and (min-width: 1024px) {
+
+
+
+    .header {
+        &__container {
+            width: auto;
+            max-width: 1024px;
+            background-image: url(../images/backgrounds/background1024.png);
+
+            &--myLibrary {
+                background-image: url(../images/backgrounds/background1024myLibrary.png)
+            }
+        }
+    }
+
+    .logo {
+        &__title {
+            display: inline-block;
+        }
+    }
+
+    .search {
+        &__input {
+            width: 340px;
+        }
+
+        &__button {
+            left: -20px;
+            bottom: 0px;
+        }
+    }
 }

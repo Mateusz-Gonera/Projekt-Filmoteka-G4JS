@@ -1,40 +1,46 @@
 <!DOCTYPE html>
 <html lang="pl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MY LIBRARY</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.1.0/modern-normalize.min.css"
-      integrity="sha512-wpPYUAdjBVSE4KJnH1VR1HeZfpl1ub8YT/NKx4PuQ5NmX2tKuGu6U/JRp5y+Y8XG2tV+wKQpNHVUX03MfMFn9Q=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./sass/main.css" />
-    <link rel="shortcut icon" href="favicon.ico" />
-  </head>
-  <body>
-    <header>
-      <div class="container header__container ">
-          <ul class="nav nav--myLibrary">
-              <div class="logo">logo</div>
-              <li class="nav__item"><a href="" class="nav__link">Home</a></li>
-              <li class="nav__item"><a href="" class="nav__link">My Library</a></li>
-          </ul>
-       <button type="submit" id="watchedButton" class="myLibrary__button myLibrary__button">WATCHED</button>
-       <button type="submit" id="queueButton" class="myLibrary__button">QUEUE</button>
-      </div>
-  </header>
-    <include src="./partials/modal.html"></include>
-    <script type="module" src="./index.js"></script>
-  </body>
-</html>
 
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MY LIBRARY</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.1.0/modern-normalize.min.css"
+    integrity="sha512-wpPYUAdjBVSE4KJnH1VR1HeZfpl1ub8YT/NKx4PuQ5NmX2tKuGu6U/JRp5y+Y8XG2tV+wKQpNHVUX03MfMFn9Q=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./sass/main.css" />
+  <link rel="shortcut icon" href="favicon.ico" />
+</head>
+
+<body>
+  <header>
+    <div class="container header__container header__container--myLibrary ">
+      <div class="header__wrapper">
+        <div class="logo">
+          <a href="index.html" class="logo__link">
+            <svg class="logo__icon" width="24" height="24">
+              <use href="./images/logo.svg#icon-logo"></use>
+            </svg>
+            <span class="logo__title">Filmoteka</span>
+          </a>
+        </div>
+        <ul class="nav">
+          <li class="nav__item"><a href="./index.html" class="nav__link">Home</a></li>
+          <li class="nav__item"><a href="./myLibrarySite.html" class="nav__link active">My Library</a></li>
+        </ul>
+      </div>
+      <div class="myLibrary__wrapper">
+        <button type="submit" id="watchedButton" class="myLibrary__button">WATCHED</button>
+        <button type="submit" id="queueButton" class="myLibrary__button">QUEUE</button>
+      </div>
+    </div>
+  </header>
+  <include src="./partials/modal.html"></include>
+  <script type="module" src="./index.js"></script>
+</body>
+
+</html>
