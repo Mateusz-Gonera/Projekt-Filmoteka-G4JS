@@ -27,13 +27,13 @@ function changePage(totalPages, page) {
   let afterPages = page + 1;
 
   if (page > 1) {
-    liTag += `<li class="btn prev" data-action="${
+    liTag += `<li class="btn prev" data-action=${
       page - 1
-    }" onclick="changePage(totalPages, ${page - 1})"><span>&#8592</span></li>`;
+    } onclick="changePage(totalPages, ${page - 1})"><span>&#8592</span></li>`;
   }
 
   if (page > 2) {
-    liTag += `<li class="num" data-action="1" onclick="changePage(totalPages, 1)"><span>1</span></li>`;
+    liTag += `<li class="num" data-action=1 onclick="changePage(totalPages, 1)"><span>1</span></li>`;
     if (page > 3) {
       liTag += `<li class="dots"><span>...</span></li>`;
     }
@@ -63,20 +63,20 @@ function changePage(totalPages, page) {
     } else {
       activeLi = '';
     }
-    liTag += `<li class="num ${activeLi}" data-action="${pageLength}" onclick="changePage(totalPages, ${pageLength})"><span>${pageLength}</span></li>`;
+    liTag += `<li class="num ${activeLi}" data-action=${pageLength} onclick="changePage(totalPages, ${pageLength})"><span>${pageLength}</span></li>`;
   }
 
   if (page < totalPages - 1) {
     if (page < totalPages - 3) {
       liTag += `<li class="dots"><span>...</span></li>`;
     }
-    liTag += `<li class="num" data-action="${totalPages}" onclick="changePage(totalPages, ${totalPages})"><span>${totalPages}</span></li>`;
+    liTag += `<li class="num" data-action=${totalPages} onclick="changePage(totalPages, ${totalPages})"><span>${totalPages}</span></li>`;
   }
 
   if (page < totalPages) {
-    liTag += `<li class="btn next" data-action="${
+    liTag += `<li class="btn next" data-action=${
       page + 1
-    }" onclick="changePage(totalPages, ${page + 1})"><span>&#8594</span></li>`;
+    } onclick="changePage(totalPages, ${page + 1})"><span>&#8594</span></li>`;
   }
 
   if (totalPages === 1) {
@@ -171,8 +171,8 @@ fetchResponseTrend(page).then(popularMovies => {
   changePage(popularMovies.total_pages, page);
 
   pagination.addEventListener('click', event => {
-    page = Number(event.target.dataset.action);
-    console.log(event.target.dataset.action);
+    page = Number(event.target.textContent);
+    console.log(event.target.textContent);
 
     fetchResponseTrend(page).then(popularMovies => {
       addFilms(popularMovies);
