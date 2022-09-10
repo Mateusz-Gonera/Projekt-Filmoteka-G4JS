@@ -27,4 +27,17 @@ const fetchResponseDetails = async movieID => {
   return moviesDetails;
 };
 
+// const getGenre = async genreID => {
+//   const responseGenre = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=pl-PL`);
+//   if (!responseGenre.ok) throw new Error();
+//   const genres = await responseGenre.json();
+//   const genresArray = genres.genres;
+//   const id = genresArray.map(genre => {
+//     return genre;
+//   })
+//   return id;
+// };
+
+// console.log(getGenre());
+
 export { fetchResponseTrend, fetchResponseSearch, fetchResponseDetails };
