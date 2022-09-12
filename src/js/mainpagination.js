@@ -12,8 +12,8 @@ import {
 
 
 const pagination = document.querySelector('.pagination__list');
-const form = document.querySelector('.search__form');
-const input = document.querySelector('input');
+// const form = document.querySelector('.search__form');
+// const input = document.querySelector('input');
 const filmList = document.querySelector('.film-list');
 
 let page = 1;
@@ -111,60 +111,6 @@ const addFilms = films => {
   filmList.innerHTML = markup;
 };
 
-form.addEventListener('submit', e => {
-  let tipedInput = input.value.trim();
-  e.preventDefault();
-  filmList.innerHTML = '';
-  pagination.innerHTML = '';
-
-  page = 1;
-  try {
-    // console.log(fetchResponseSearch(tipedInput, page));
-    if (tipedInput === '') {
-      filmList.innerHTML = '';
-      pagination.innerHTML = '';
-    }
-    return fetchResponseSearch(tipedInput, page).then(movies => {
-      if (movies.total_results === 0) {
-        Notiflix.Notify.failure(
-          'Sorry, there are no movies matching your search query. Please try again.'
-        );
-        return fetchResponseTrend(page).then(films => {
-          addFilms(films);
-          changePage(films.total_pages, page);
-
-          pagination.addEventListener('click', event => {
-            page = Number(event.target.dataset.action);
-
-            fetchResponseTrend(page).then(films => {
-              addFilms(films);
-              changePage(films.total_pages, page);
-            });
-          });
-          pagination.removeEventListener('submit', {});
-        });
-      }
-
-      if (movies.total_results > 0) {
-        addFilms(movies);
-        changePage(movies.total_pages, page);
-
-        pagination.addEventListener('click', event => {
-          page = Number(event.target.dataset.action);
-
-          fetchResponseSearch(tipedInput, page).then(movies => {
-            addFilms(movies);
-            changePage(movies.total_pages, page);
-          });
-        });
-        pagination.removeEventListener('submit', {});
-      }
-    });
-  } catch (error) {
-    console.log(error.message);
-  }
-});
-
 
 fetchResponseTrend(page).then(popularMovies => {
   addFilms(popularMovies);
@@ -182,3 +128,59 @@ fetchResponseTrend(page).then(popularMovies => {
 });
 
 pagination.removeEventListener('submit', {});
+
+
+// form.addEventListener('submit', e => {
+//   let tipedInput = input.value.trim();
+//   e.preventDefault();
+//   filmList.innerHTML = '';
+//   pagination.innerHTML = '';
+
+//   page = 1;
+//   try {
+//     // console.log(fetchResponseSearch(tipedInput, page));
+//     if (tipedInput === '') {
+//       filmList.innerHTML = '';
+//       pagination.innerHTML = '';
+//     }
+//     return fetchResponseSearch(tipedInput, page).then(movies => {
+//       if (movies.total_results === 0) {
+//         Notiflix.Notify.failure(
+//           'Sorry, there are no movies matching your search query. Please try again.'
+//         );
+//         return fetchResponseTrend(page).then(films => {
+//           addFilms(films);
+//           changePage(films.total_pages, page);
+
+//           pagination.addEventListener('click', event => {
+//             page = Number(event.target.dataset.action);
+
+//             fetchResponseTrend(page).then(films => {
+//               addFilms(films);
+//               changePage(films.total_pages, page);
+//             });
+//           });
+//           pagination.removeEventListener('submit', {});
+//         });
+//       }
+
+//       if (movies.total_results > 0) {
+//         addFilms(movies);
+//         changePage(movies.total_pages, page);
+
+//         pagination.addEventListener('click', event => {
+//           page = Number(event.target.dataset.action);
+
+//           fetchResponseSearch(tipedInput, page).then(movies => {
+//             addFilms(movies);
+//             changePage(movies.total_pages, page);
+//           });
+//         });
+//         pagination.removeEventListener('submit', {});
+//       }
+//     });
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+// });
+
