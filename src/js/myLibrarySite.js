@@ -4,3 +4,4 @@ import { fetchResponseTrend, fetchResponseSearch, fetchResponseDetails, getGenre
 
 
 
+SPRAWDZMY CZY DZIALA
