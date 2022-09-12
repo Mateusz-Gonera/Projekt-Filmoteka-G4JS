@@ -127,7 +127,7 @@ form.addEventListener('submit', e => {
     return fetchResponseSearch(tipedInput, page).then(movies => {
       if (movies.total_results === 0) {
         Notiflix.Notify.failure(
-          'Sorry, there are no images matching your search query. Please try again.'
+          'Sorry, there are no movies matching your search query. Please try again.'
         );
         return fetchResponseTrend(page).then(films => {
           addFilms(films);
