@@ -38,6 +38,5 @@ const fetchResponseDetails = async movieID => {
 //   return id;
 // };
 
-// console.log(getGenre());
 
 export { fetchResponseTrend, fetchResponseSearch, fetchResponseDetails };

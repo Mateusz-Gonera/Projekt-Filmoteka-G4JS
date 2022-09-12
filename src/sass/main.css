@@ -189,6 +189,23 @@ header {
     bottom: 0px;
   }
 }
+.footer__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+  padding: 28px;
+  background-color: #f7f7f7;
+}
+
+@media screen and (min-width: 768px) {
+  .footer__container {
+    flex-direction: row;
+    justify-content: center;
+    height: 77px;
+  }
+}
 .myLibrary__wrapper {
   margin-top: 46px;
   display: flex;
