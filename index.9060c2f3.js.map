@@ -1,1 +1,0 @@
-{"mappings":"oeAAAA,EAAA,S","sources":["src/js/modal.js"],"sourcesContent":["import Notiflix from 'notiflix';\nimport debounce from 'lodash.debounce';\nimport { fetchResponseTrend, fetchResponseSearch, fetchResponseDetails, getGenreNames } from './fetchResponse';\n\n\n\n"],"names":["parcelRequire"],"version":3,"file":"index.9060c2f3.js.map"}

@@ -1,2 +1,2 @@
 !function(){var e=document.getElementById("footerModal"),t=document.getElementById("footerBtn"),n=document.getElementById("footerCloseBtn");t.addEventListener("click",(function(){e.style.display="block"})),n.addEventListener("click",(function(){e.style.display="none"})),window.addEventListener("click",(function(t){t.target==e&&(e.style.display="none")}))}();
-//# sourceMappingURL=index.bc5e14cb.js.map
+//# sourceMappingURL=myLibrarySite.bf5406f9.js.map
