@@ -1,1 +1,33 @@
+.myLibrary {
+    &__wrapper {
+        margin-top: 46px;
+        display: flex;
+        justify-content: space-between;
+    }
 
+    &__button {
+        color: $secondaryFontColor;
+        background-color: transparent;
+        width: 136px;
+        height: 44px;
+        border-radius: 5px;
+        border-color: white;
+        border-style: solid;
+        cursor: pointer;
+    &:hover{
+        border-color: $mainColor;
+    }
+    }
+
+}
+
+@media screen and (min-width: 768px) {
+    .myLibrary {
+        &__wrapper {
+            justify-content: center;
+        }
+        &__button:first-child{
+            margin-right: 15px;
+        }
+    }
+}

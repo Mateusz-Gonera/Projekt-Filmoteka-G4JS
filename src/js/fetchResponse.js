@@ -27,4 +27,30 @@ const fetchResponseDetails = async movieID => {
   return moviesDetails;
 };
 
-export { fetchResponseTrend, fetchResponseSearch, fetchResponseDetails };
+// gatunki filmowe 
+
+const getGenres = async () => {
+  try {
+    const responseGenre = await fetch(
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=pl-PL`
+    );
+    if (!responseGenre.ok) throw new Error();
+    const genresProm = await responseGenre.json();
+    return genresProm;
+    
+  } catch (error) {}
+};
+
+const getGenreNames = async genreIDs => {
+  try {
+    const genrePromise = await getGenres();
+    const genreArr = genrePromise.genres;
+    const genreNames = genreIDs
+      .map(genreID => genreArr.find(genre => genre.id === genreID).name)
+      .join(', ');
+    return genreNames;
+  } catch (error) {}
+};
+
+
+export { fetchResponseTrend, fetchResponseSearch, fetchResponseDetails, getGenreNames };
