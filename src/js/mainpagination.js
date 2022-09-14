@@ -103,7 +103,7 @@ const addFilms = films => {
             <div class="film-info">
                 <p class="film-title">${film.title}</p>
                 <div class="film-subinfo">
-                    <p>Gatunek z API</p>
+                    <p class="film-genre">Gatunek filmowy</p>
                     <p>${film.release_date}</p>
                 </div>
             </div>
@@ -112,23 +112,16 @@ const addFilms = films => {
     .join('');
   filmList.innerHTML = markup;
 
-  // const woo = async () => {
-  //   const object = await fetchResponseDetails(this.id)
-  //     const genreList = object.genres;
-  //     const string = genreList.map(item => item.name).join(', ');
-  //     return string;
-    
-  // }
-  // woo()
-  
-  // const filmGenre = document.querySelector('.film-genre');
-  // const foo = async () => {
-  //   const arr = [28, 14, 12];
-  //   const genres = await getGenreNames(arr);
+  const filmGenre = document.querySelectorAll('.film-genre');
 
-  //   filmGenre.innerHTML = genres;
-  // };
-  // foo();
+  const addGenres = async () => {
+    const genreId = movies.map(film => film.genre_ids);
+    for (let i = 0; i <= filmGenre.length; i++) {
+      const add = await getGenreNames(genreId[i]);
+      filmGenre[i].innerHTML = add;
+    }
+  };
+  addGenres();
 };
 
 fetchResponseTrend(page).then(popularMovies => {
