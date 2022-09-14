@@ -15,6 +15,7 @@ const pagination = document.querySelector('.pagination__list');
 const form = document.querySelector('.search__form');
 const input = document.querySelector('input');
 const filmList = document.querySelector('.film-list');
+const info = document.querySelector('.infoPlace');
 
 let page = 1;
 
@@ -110,6 +111,24 @@ const addFilms = films => {
     )
     .join('');
   filmList.innerHTML = markup;
+
+  // const woo = async () => {
+  //   const object = await fetchResponseDetails(this.id)
+  //     const genreList = object.genres;
+  //     const string = genreList.map(item => item.name).join(', ');
+  //     return string;
+    
+  // }
+  // woo()
+  
+  // const filmGenre = document.querySelector('.film-genre');
+  // const foo = async () => {
+  //   const arr = [28, 14, 12];
+  //   const genres = await getGenreNames(arr);
+
+  //   filmGenre.innerHTML = genres;
+  // };
+  // foo();
 };
 
 fetchResponseTrend(page).then(popularMovies => {
@@ -140,26 +159,29 @@ form.addEventListener('submit', e => {
     // console.log(fetchResponseSearch(tipedInput, page));
     return fetchResponseSearch(tipedInput, page).then(movies => {
       if (movies.total_results === 0) {
-        Notiflix.Notify.failure(
-          'Sorry, there are no movies matching your search query. Please try again.'
-        );
-        return fetchResponseTrend(page).then(films => {
-          addFilms(films);
-          changePage(films.total_pages, page);
+        info.innerHTML =
+          'Search result not successful. Enter the correct movie name and ';
 
-          pagination.addEventListener('click', async event => {
-            page = Number(event.target.textContent);
+        filmList.innerHTML = '';
+        pagination.innerHTML = '';
+        // return fetchResponseTrend(page).then(films => {
+        //   addFilms(films);
+        //   changePage(films.total_pages, page);
 
-            const nextPage = await fetchResponseTrend(page);
+        //   pagination.addEventListener('click', async event => {
+        //     page = Number(event.target.textContent);
 
-            addFilms(nextPage);
-            changePage(nextPage.total_pages, page);
-          });
-          pagination.removeEventListener('submit', {});
-        });
+        //     const nextPage = await fetchResponseTrend(page);
+
+        //     addFilms(nextPage);
+        //     changePage(nextPage.total_pages, page);
+        //   });
+        //   pagination.removeEventListener('submit', {});
+        // });
       }
 
       if (movies.total_results > 0) {
+        info.innerHTML = '';
         addFilms(movies);
         changePage(movies.total_pages, page);
 
