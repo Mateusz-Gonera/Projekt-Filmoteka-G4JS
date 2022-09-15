@@ -18,6 +18,9 @@ const filmList = document.querySelector('.film-list');
 const info = document.querySelector('.infoPlace');
 const next = document.querySelector('.btnnext')
 const prev = document.querySelector('.btnprev')
+console.log(pagination)
+console.log(next)
+console.log(prev)
 
 // const paginationItem = document.querySelectorAll('.pagination__item');
 
@@ -136,6 +139,7 @@ fetchResponseTrend(page).then(popularMovies => {
 
   pagination.addEventListener('click', async event => {
     const variable = (isNaN(event.target.textContent));
+    console.log(variable);
     if (variable) return;
     else {
       page = Number(event.target.textContent);
@@ -152,6 +156,7 @@ fetchResponseTrend(page).then(popularMovies => {
 
 
 next.addEventListener("click", async () => {
+
   console.log("test")
   page = page + 1;
   const nextPage = await fetchResponseTrend(page);
@@ -161,10 +166,12 @@ next.addEventListener("click", async () => {
 })
 
 prev.addEventListener("click", async () => {
-  console.log("test")
-  page = page - 1;
-  const nextPage = await fetchResponseTrend(page);
-
-  addFilms(nextPage);
-  changePage(nextPage.total_pages, page);
+  if (page > 1) {
+    console.log("test")
+    page = page - 1;
+    const nextPage = await fetchResponseTrend(page);
+    console.log(nextPage);
+    addFilms(nextPage);
+    changePage(nextPage.total_pages, page);
+  }
 })

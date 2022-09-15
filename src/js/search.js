@@ -20,16 +20,13 @@ searchForm.addEventListener("submit", (event) => {
             else {
                 info.innerHTML = "";
                 for (let i = 1; i < data.results.length; i++) {
-                    let filmGenres;
-                    getGenreNames(data.results[i].genre_ids).then((names) => { filmGenres = names })
-                    console.log(filmGenres)
                     injectionDiv.insertAdjacentHTML("beforeend", `<div class="single-film">
                 <img class="film-image" src="https://image.tmdb.org/t/p/w500${data.results[i].poster_path}"
             alt="movie card">
         <div class="film-info">
             <p class="film-title">${data.results[i].original_title}</p>
             <div class="film-subinfo">
-                <p>${getGenreNames(data.results[i].genre_ids).then(names => names)} W API nie ma gatunku</p>
+                <p>${}</p>
                 <p>${data.results[i].release_date}</p>
             </div>
         </div>
