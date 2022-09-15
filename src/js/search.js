@@ -26,7 +26,7 @@ searchForm.addEventListener("submit", (event) => {
         <div class="film-info">
             <p class="film-title">${data.results[i].original_title}</p>
             <div class="film-subinfo">
-                <p>${}</p>
+                <p></p>
                 <p>${data.results[i].release_date}</p>
             </div>
         </div>

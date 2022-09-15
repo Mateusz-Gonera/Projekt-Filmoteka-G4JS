@@ -18,6 +18,7 @@ const filmList = document.querySelector('.film-list');
 const info = document.querySelector('.infoPlace');
 const next = document.querySelector('.btnnext')
 const prev = document.querySelector('.btnprev')
+prev.style.display = "none";
 console.log(pagination)
 console.log(next)
 console.log(prev)
@@ -25,6 +26,9 @@ console.log(prev)
 // const paginationItem = document.querySelectorAll('.pagination__item');
 
 let page = 1;
+let lastPage;
+fetchResponseTrend(page).then(films => lastPage = films.total_pages)
+console.log(lastPage)
 
 
 function changePage(totalPages, page) {
@@ -34,10 +38,6 @@ function changePage(totalPages, page) {
   let afterPages = page + 1;
   pagination.innerHTML = '';
 
-  if (page > 1) {
-    liTag += `<li class="btn prev pagination__item" data-page=${page - 1
-      }"><span>&#8592</span></li>`;
-  }
 
   if (page > 2) {
     liTag += `<li class="num-first pagination__item" data-page=1"><span>1</span></li>`;
@@ -80,15 +80,10 @@ function changePage(totalPages, page) {
     liTag += `<li class="num-last pagination__item" data-page=${totalPages}"><span>${totalPages}</span></li>`;
   }
 
-  if (page < totalPages) {
-    liTag += `<li class="btn next pagination__item" data-page=${page + 1
-      }"><span>&#8594</span></li>`;
-  }
+
 
   if (totalPages === 1) {
-    liTag = `<li class="btn prev"><span>&#8592</span></li>
-          <li class="num active"><span>1</span></li>
-          <li class="btn next"><span>&#8594</span></li>`;
+    liTag = `<li class="num active"><span>1</span></li>`;
   }
 
   pagination.innerHTML = liTag;
@@ -146,24 +141,21 @@ fetchResponseTrend(page).then(popularMovies => {
       // console.log(event.target.dataset.page);
 
       const nextPage = await fetchResponseTrend(page);
-
+      lastPage = nextPage.total_pages;
       addFilms(nextPage);
       changePage(nextPage.total_pages, page);
+
+      if (page == 1) prev.style.display = "none";
+      else prev.style.display = "block";
+
+      if (page == lastPage) next.style.display = "none";
+      else next.style.display = "block";
+
     }
   });
 });
 
 
-
-next.addEventListener("click", async () => {
-
-  console.log("test")
-  page = page + 1;
-  const nextPage = await fetchResponseTrend(page);
-
-  addFilms(nextPage);
-  changePage(nextPage.total_pages, page);
-})
 
 prev.addEventListener("click", async () => {
   if (page > 1) {
@@ -173,5 +165,22 @@ prev.addEventListener("click", async () => {
     console.log(nextPage);
     addFilms(nextPage);
     changePage(nextPage.total_pages, page);
+    if (page == 1) prev.style.display = "none";
+    next.style.display = "block";
   }
 })
+
+next.addEventListener("click", async () => {
+  if (page < lastPage) {
+    console.log("test")
+    page = page + 1;
+    const nextPage = await fetchResponseTrend(page);
+    lastPage = nextPage.total_pages;
+    console.log(lastPage)
+    addFilms(nextPage);
+    changePage(nextPage.total_pages, page);
+    if (page == lastPage) next.style.display = "none";
+    prev.style.display = "block";
+  }
+})
+
