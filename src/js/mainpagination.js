@@ -15,10 +15,14 @@ const pagination = document.querySelector('.pagination__list');
 const form = document.querySelector('.search__form');
 const input = document.querySelector('input');
 const filmList = document.querySelector('.film-list');
+const info = document.querySelector('.infoPlace');
+const next = document.querySelector('.btnnext')
+const prev = document.querySelector('.btnprev')
+
+// const paginationItem = document.querySelectorAll('.pagination__item');
 
 let page = 1;
 
-//  console.log(fetchResponseTrend(1));
 
 function changePage(totalPages, page) {
   let liTag = '';
@@ -28,13 +32,12 @@ function changePage(totalPages, page) {
   pagination.innerHTML = '';
 
   if (page > 1) {
-    liTag += `<li class="btn prev" data-action=${
-      page - 1
-    } onclick="changePage(totalPages, ${page - 1})"><span>&#8592</span></li>`;
+    liTag += `<li class="btn prev pagination__item" data-page=${page - 1
+      }"><span>&#8592</span></li>`;
   }
 
   if (page > 2) {
-    liTag += `<li class="num-first" data-action=1 onclick="changePage(totalPages, 1)"><span>1</span></li>`;
+    liTag += `<li class="num-first pagination__item" data-page=1"><span>1</span></li>`;
     if (page > 3) {
       liTag += `<li class="dots"><span>...</span></li>`;
     }
@@ -64,20 +67,19 @@ function changePage(totalPages, page) {
     } else {
       activeLi = '';
     }
-    liTag += `<li class="num ${activeLi}" data-action=${pageLength} onclick="changePage(totalPages, ${pageLength})"><span>${pageLength}</span></li>`;
+    liTag += `<li class="num ${activeLi} pagination__item" data-page=${pageLength}"><span>${pageLength}</span></li>`;
   }
 
   if (page < totalPages - 1) {
     if (page < totalPages - 3) {
       liTag += `<li class="dots"><span>...</span></li>`;
     }
-    liTag += `<li class="num-last" data-action=${totalPages} onclick="changePage(totalPages, ${totalPages})"><span>${totalPages}</span></li>`;
+    liTag += `<li class="num-last pagination__item" data-page=${totalPages}"><span>${totalPages}</span></li>`;
   }
 
   if (page < totalPages) {
-    liTag += `<li class="btn next" data-action=${
-      page + 1
-    } onclick="changePage(totalPages, ${page + 1})"><span>&#8594</span></li>`;
+    liTag += `<li class="btn next pagination__item" data-page=${page + 1
+      }"><span>&#8594</span></li>`;
   }
 
   if (totalPages === 1) {
@@ -89,7 +91,6 @@ function changePage(totalPages, page) {
   pagination.innerHTML = liTag;
 }
 
-// changePage(totalPages, page);
 
 const addFilms = films => {
   const movies = films.results;
@@ -102,7 +103,7 @@ const addFilms = films => {
             <div class="film-info">
                 <p class="film-title">${film.title}</p>
                 <div class="film-subinfo">
-                    <p>Gatunek z API</p>
+                    <p class="film-genre">Gatunek filmowy</p>
                     <p>${film.release_date}</p>
                 </div>
             </div>
@@ -110,70 +111,60 @@ const addFilms = films => {
     )
     .join('');
   filmList.innerHTML = markup;
+
+  // const filmGenre = document.querySelectorAll('.film-genre');
+
+  // const addGenres = async () => {
+  //   const genreId = movies.map(film => film.genre_ids);
+  //   for (let i = 0; i <= filmGenre.length; i++) {
+  //     const add = await getGenreNames(genreId[i]);
+  //     filmGenre[i].innerHTML = add;
+  //   }
+  // };
+  // addGenres();
 };
+
+
+// document.addEventListener('.pagination__item',async e => {
+//   page = Number(e.target.dataset.page)
+// });
+// console.log(page)
 
 fetchResponseTrend(page).then(popularMovies => {
   addFilms(popularMovies);
   changePage(popularMovies.total_pages, page);
 
   pagination.addEventListener('click', async event => {
-    page = Number(event.target.textContent);
-    console.log(event.target.dataset.action);
+    const variable = (isNaN(event.target.textContent));
+    if (variable) return;
+    else {
+      page = Number(event.target.textContent);
+      // console.log(event.target.dataset.page);
 
-    const nextPage = await fetchResponseTrend(page);
+      const nextPage = await fetchResponseTrend(page);
 
-    addFilms(nextPage);
-    changePage(nextPage.total_pages, page);
+      addFilms(nextPage);
+      changePage(nextPage.total_pages, page);
+    }
   });
 });
 
-pagination.removeEventListener('submit', {});
 
-form.addEventListener('submit', e => {
-  let tipedInput = input.value.trim();
-  e.preventDefault();
-  filmList.innerHTML = '';
-  pagination.innerHTML = '';
 
-  page = 1;
-  try {
-    // console.log(fetchResponseSearch(tipedInput, page));
-    return fetchResponseSearch(tipedInput, page).then(movies => {
-      if (movies.total_results === 0) {
-        Notiflix.Notify.failure(
-          'Sorry, there are no movies matching your search query. Please try again.'
-        );
-        return fetchResponseTrend(page).then(films => {
-          addFilms(films);
-          changePage(films.total_pages, page);
+next.addEventListener("click", async () => {
+  console.log("test")
+  page = page + 1;
+  const nextPage = await fetchResponseTrend(page);
 
-          pagination.addEventListener('click', async event => {
-            page = Number(event.target.textContent);
+  addFilms(nextPage);
+  changePage(nextPage.total_pages, page);
+})
 
-            const nextPage = await fetchResponseTrend(page);
+prev.addEventListener("click", async () => {
+  console.log("test")
+  page = page - 1;
+  const nextPage = await fetchResponseTrend(page);
 
-            addFilms(nextPage);
-            changePage(nextPage.total_pages, page);
-          });
-          pagination.removeEventListener('submit', {});
-        });
-      }
-
-      if (movies.total_results > 0) {
-        addFilms(movies);
-        changePage(movies.total_pages, page);
-
-        pagination.addEventListener('click', async event => {
-          page = Number(event.target.textContent);
-
-          const nextMovie = await fetchResponseSearch(tipedInput, page);
-          addFilms(nextMovie);
-          changePage(nextMovie.total_pages, page);
-        });
-        pagination.removeEventListener('submit', {});
-      }
-    });
-  } catch (error) {
-    console.log(error.message);
-  }
-});
+  addFilms(nextPage);
+  changePage(nextPage.total_pages, page);
+})
