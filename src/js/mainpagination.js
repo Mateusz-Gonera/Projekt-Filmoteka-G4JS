@@ -16,10 +16,10 @@ const form = document.querySelector('.search__form');
 const input = document.querySelector('input');
 const filmList = document.querySelector('.film-list');
 const info = document.querySelector('.infoPlace');
-// const paginationItem = document.querySelectorAll('.pagination__item');
+const prevBtn = document.querySelector('.prev');
+const nextBtn = document.querySelector('.next');
 
 let page = 1;
-
 
 function changePage(totalPages, page) {
   let liTag = '';
@@ -28,11 +28,11 @@ function changePage(totalPages, page) {
   let afterPages = page + 1;
   pagination.innerHTML = '';
 
-  if (page > 1) {
-    liTag += `<li class="btn prev pagination__item" data-page=${
-      page - 1
-    }"><span>&#8592</span></li>`;
-  }
+  // if (page > 1) {
+  //   liTag += `<li class="btn prev pagination__item" data-page=${
+  //     page - 1
+  //   }"><span>&#8592</span></li>`;
+  // }
 
   if (page > 2) {
     liTag += `<li class="num-first pagination__item" data-page=1"><span>1</span></li>`;
@@ -75,11 +75,11 @@ function changePage(totalPages, page) {
     liTag += `<li class="num-last pagination__item" data-page=${totalPages}"><span>${totalPages}</span></li>`;
   }
 
-  if (page < totalPages) {
-    liTag += `<li class="btn next pagination__item" data-page=${
-      page + 1
-    }"><span>&#8594</span></li>`;
-  }
+  // if (page < totalPages) {
+  //   liTag += `<li class="btn next pagination__item" data-page=${
+  //     page + 1
+  //   }"><span>&#8594</span></li>`;
+  // }
 
   if (totalPages === 1) {
     liTag = `<li class="btn prev"><span>&#8592</span></li>
@@ -89,7 +89,6 @@ function changePage(totalPages, page) {
 
   pagination.innerHTML = liTag;
 }
-
 
 const addFilms = films => {
   const movies = films.results;
@@ -111,37 +110,52 @@ const addFilms = films => {
     .join('');
   filmList.innerHTML = markup;
 
-  // const filmGenre = document.querySelectorAll('.film-genre');
+  const filmGenre = document.querySelectorAll('.film-genre');
 
-  // const addGenres = async () => {
-  //   const genreId = movies.map(film => film.genre_ids);
-  //   for (let i = 0; i <= filmGenre.length; i++) {
-  //     const add = await getGenreNames(genreId[i]);
-  //     filmGenre[i].innerHTML = add;
-  //   }
-  // };
-  // addGenres();
+  const addGenres = async () => {
+    const genreId = movies.map(film => film.genre_ids);
+    for (let i = 0; i <= filmGenre.length; i++) {
+      const add = await getGenreNames(genreId[i]);
+      filmGenre[i].innerHTML = add;
+    }
+  };
+  addGenres();
 };
-
 
 // document.addEventListener('.pagination__item',async e => {
 //   page = Number(e.target.dataset.page)
 // });
-// console.log(page)
+
 
 fetchResponseTrend(page).then(popularMovies => {
   addFilms(popularMovies);
   changePage(popularMovies.total_pages, page);
 
   pagination.addEventListener('click', async event => {
-      page = Number(event.target.textContent);
-      // console.log(event.target.dataset.page);
 
-      const nextPage = await fetchResponseTrend(page);
+    page = Number(event.target.textContent);
+    // console.log(event.target.dataset.page);
 
-      addFilms(nextPage);
-      changePage(nextPage.total_pages, page);
-    
+    const nextPage = await fetchResponseTrend(page);
+
+    addFilms(nextPage);
+    changePage(nextPage.total_pages, page);
+  });
+
+  prevBtn.addEventListener('click', async () => {
+    page = page - 1;
+    const nextPage = await fetchResponseTrend(page);
+
+    addFilms(nextPage);
+    changePage(nextPage.total_pages, page);
+  });
+
+  nextBtn.addEventListener('click', async () => {
+    page = page + 1;
+    const nextPage = await fetchResponseTrend(page);
+
+    addFilms(nextPage);
+    changePage(nextPage.total_pages, page);
   });
 });
 
