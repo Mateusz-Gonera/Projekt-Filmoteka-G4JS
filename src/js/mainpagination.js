@@ -61,7 +61,7 @@ function changePage(totalPages, page) {
       pageLength++;
     }
     if (page === pageLength) {
-      activeLi = 'active';
+      activeLi = 'btn__active';
     } else {
       activeLi = '';
     }
@@ -122,19 +122,12 @@ const addFilms = films => {
   // addGenres();
 };
 
-// document.addEventListener('.pagination__item',async e => {
-//   page = Number(e.target.dataset.page)
-// });
-
-
 fetchResponseTrend(page).then(popularMovies => {
   addFilms(popularMovies);
   changePage(popularMovies.total_pages, page);
 
   pagination.addEventListener('click', async event => {
-
     page = Number(event.target.textContent);
-    // console.log(event.target.dataset.page);
 
     const nextPage = await fetchResponseTrend(page);
 
@@ -161,54 +154,71 @@ fetchResponseTrend(page).then(popularMovies => {
 
 pagination.removeEventListener('submit', {});
 
-// form.addEventListener('submit', e => {
-//   let tipedInput = input.value.trim();
-//   e.preventDefault();
-//   filmList.innerHTML = '';
-//   pagination.innerHTML = '';
+form.addEventListener('submit', e => {
+  let tipedInput = input.value.trim();
+  e.preventDefault();
+  filmList.innerHTML = '';
+  pagination.innerHTML = '';
 
-//   page = 1;
-//   try {
-//     // console.log(fetchResponseSearch(tipedInput, page));
-//     return fetchResponseSearch(tipedInput, page).then(movies => {
-//       if (movies.total_results === 0) {
-//         info.innerHTML =
-//           'Search result not successful. Enter the correct movie name and ';
+  page = 1;
+  try {
+    // console.log(fetchResponseSearch(tipedInput, page));
+    return fetchResponseSearch(tipedInput, page).then(movies => {
+      if (movies.total_results === 0) {
+        info.innerHTML =
+          'Search result not successful. Enter the correct movie name and ';
 
-//         filmList.innerHTML = '';
-//         pagination.innerHTML = '';
-//         // return fetchResponseTrend(page).then(films => {
-//         //   addFilms(films);
-//         //   changePage(films.total_pages, page);
+        filmList.innerHTML = '';
+        pagination.innerHTML = '';
+        // return fetchResponseTrend(page).then(films => {
+        //   addFilms(films);
+        //   changePage(films.total_pages, page);
 
-//         //   pagination.addEventListener('click', async event => {
-//         //     page = Number(event.target.textContent);
+        //   pagination.addEventListener('click', async event => {
+        //     page = Number(event.target.textContent);
 
-//         //     const nextPage = await fetchResponseTrend(page);
+        //     const nextPage = await fetchResponseTrend(page);
 
-//         //     addFilms(nextPage);
-//         //     changePage(nextPage.total_pages, page);
-//         //   });
-//         //   pagination.removeEventListener('submit', {});
-//         // });
-//       }
+        //     addFilms(nextPage);
+        //     changePage(nextPage.total_pages, page);
+        //   });
+        //   pagination.removeEventListener('submit', {});
+        // });
+      }
 
-//       if (movies.total_results > 0) {
-//         info.innerHTML = '';
-//         addFilms(movies);
-//         changePage(movies.total_pages, page);
+      if (movies.total_results > 0) {
+        info.innerHTML = '';
+        addFilms(movies);
+        changePage(movies.total_pages, page);
 
-//         pagination.addEventListener('click', async event => {
-//           page = Number(event.target.textContent);
+        pagination.addEventListener('click', async event => {
+          page = Number(event.target.textContent);
 
-//           const nextMovie = await fetchResponseSearch(tipedInput, page);
-//           addFilms(nextMovie);
-//           changePage(nextMovie.total_pages, page);
-//         });
-//         pagination.removeEventListener('submit', {});
-//       }
-//     });
-//   } catch (error) {
-//     console.log(error.message);
-//   }
-// });
+          const nextPage = await fetchResponseSearch(tipedInput, page);
+
+          addFilms(nextPage);
+          changePage(nextPage.total_pages, page);
+        });
+
+        prevBtn.addEventListener('click', async () => {
+          page = page - 1;
+          const nextPage = await fetchResponseSearch(tipedInput, page);
+
+          addFilms(nextPage);
+          changePage(nextPage.total_pages, page);
+        });
+
+        nextBtn.addEventListener('click', async () => {
+          page = page + 1;
+          const nextPage = await fetchResponseSearch(tipedInput, page);
+
+          addFilms(nextPage);
+          changePage(nextPage.total_pages, page);
+        });
+        pagination.removeEventListener('submit', {});
+      }
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
+});
