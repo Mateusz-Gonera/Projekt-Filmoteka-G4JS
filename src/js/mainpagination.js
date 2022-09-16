@@ -19,16 +19,13 @@ const info = document.querySelector('.infoPlace');
 const next = document.querySelector('.btnnext')
 const prev = document.querySelector('.btnprev')
 prev.style.display = "none";
-console.log(pagination)
-console.log(next)
-console.log(prev)
+
 
 // const paginationItem = document.querySelectorAll('.pagination__item');
 
 let page = 1;
 let lastPage;
 fetchResponseTrend(page).then(films => lastPage = films.total_pages)
-console.log(lastPage)
 
 
 function changePage(totalPages, page) {
@@ -110,16 +107,16 @@ const addFilms = films => {
     .join('');
   filmList.innerHTML = markup;
 
-  // const filmGenre = document.querySelectorAll('.film-genre');
+  const filmGenre = document.querySelectorAll('.film-genre');
 
-  // const addGenres = async () => {
-  //   const genreId = movies.map(film => film.genre_ids);
-  //   for (let i = 0; i <= filmGenre.length; i++) {
-  //     const add = await getGenreNames(genreId[i]);
-  //     filmGenre[i].innerHTML = add;
-  //   }
-  // };
-  // addGenres();
+  const addGenres = async () => {
+    const genreId = movies.map(film => film.genre_ids);
+    for (let i = 0; i <= filmGenre.length; i++) {
+      const add = await getGenreNames(genreId[i]);
+      filmGenre[i].innerHTML = add;
+    }
+  };
+  addGenres();
 };
 
 
@@ -134,7 +131,6 @@ fetchResponseTrend(page).then(popularMovies => {
 
   pagination.addEventListener('click', async event => {
     const variable = (isNaN(event.target.textContent));
-    console.log(variable);
     if (variable) return;
     else {
       page = Number(event.target.textContent);
@@ -159,10 +155,8 @@ fetchResponseTrend(page).then(popularMovies => {
 
 prev.addEventListener("click", async () => {
   if (page > 1) {
-    console.log("test")
     page = page - 1;
     const nextPage = await fetchResponseTrend(page);
-    console.log(nextPage);
     addFilms(nextPage);
     changePage(nextPage.total_pages, page);
     if (page == 1) prev.style.display = "none";
@@ -172,11 +166,9 @@ prev.addEventListener("click", async () => {
 
 next.addEventListener("click", async () => {
   if (page < lastPage) {
-    console.log("test")
     page = page + 1;
     const nextPage = await fetchResponseTrend(page);
     lastPage = nextPage.total_pages;
-    console.log(lastPage)
     addFilms(nextPage);
     changePage(nextPage.total_pages, page);
     if (page == lastPage) next.style.display = "none";
