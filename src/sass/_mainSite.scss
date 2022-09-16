@@ -8,6 +8,8 @@
     padding: 28px;
     background-color: #f7f7f7;
   }
+
+
 }
 
 @media screen and (min-width: 768px) {
@@ -26,10 +28,11 @@
   justify-content: center;
   margin: 40px auto;
 
+
   &__list {
     display: flex;
 
-    & > li {
+    &>li {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -45,7 +48,9 @@
         color: $secondaryFontColor;
       }
     }
+
   }
+
 }
 
 .btn {
@@ -57,16 +62,12 @@
   }
 }
 
-li.dots,
-li.num-first,
-li.num-last {
+li.dots {
   display: none;
 }
 
 @media screen and (min-width: 480px) {
-  li.dots,
-  li.num-first,
-  li.num-last {
-    display: flex;
+  li.dots {
+    display: block;
   }
 }

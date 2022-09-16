@@ -7,17 +7,15 @@ import {
   getGenreNames,
 } from './fetchResponse';
 
-// const s = 1;
-
-// export { s };
-
 const pagination = document.querySelector('.pagination__list');
 const form = document.querySelector('.search__form');
 const input = document.querySelector('input');
 const filmList = document.querySelector('.film-list');
 const info = document.querySelector('.infoPlace');
-const prevBtn = document.querySelector('.prev');
-const nextBtn = document.querySelector('.next');
+const prev = document.querySelector('.prev');
+const next = document.querySelector('.next');
+
+prev.style.display = 'none';
 
 let page = 1;
 
@@ -95,8 +93,8 @@ function changePage(totalPages, page) {
   pagination.innerHTML = liTag;
 }
 
-
 const addFilms = films => {
+  filmList.innerHTML = '';
   const movies = films.results;
   const markup = movies
     .map(
@@ -128,15 +126,13 @@ const addFilms = films => {
   // addGenres();
 };
 
+
 form.addEventListener('submit', e => {
   let tipedInput = input.value.trim();
   e.preventDefault();
-  filmList.innerHTML = '';
-  pagination.innerHTML = '';
-
   page = 1;
+
   try {
-    // console.log(fetchResponseSearch(tipedInput, page));
     return fetchResponseSearch(tipedInput, page).then(movies => {
       if (movies.total_results === 0) {
         info.innerHTML =
@@ -152,71 +148,97 @@ form.addEventListener('submit', e => {
         changePage(movies.total_pages, page);
 
         pagination.addEventListener('click', async event => {
-          page = Number(event.target.textContent);
+          if (isNaN(event.target.textContent)) return;
+          else {
+            page = Number(event.target.textContent);
 
-          const nextPage = await fetchResponseSearch(tipedInput, page);
+            const nextPage = await fetchResponseSearch(tipedInput, page);
 
-          addFilms(nextPage);
-          changePage(nextPage.total_pages, page);
+            addFilms(nextPage);
+            changePage(nextPage.total_pages, page);
+
+            if (page == 1) prev.style.display = 'none';
+            else prev.style.display = 'block';
+
+            if (page == nextPage.total_pages) next.style.display = 'none';
+            else next.style.display = 'block';
+          }
         });
 
-        prevBtn.addEventListener('click', async () => {
-          page = page - 1;
-          const nextPage = await fetchResponseSearch(tipedInput, page);
-
-          addFilms(nextPage);
-          changePage(nextPage.total_pages, page);
+        prev.addEventListener('click', async () => {
+          if (page > 1) {
+            page = page - 1;
+            const nextPage = await fetchResponseSearch(tipedInput, page);
+            addFilms(nextPage);
+            changePage(nextPage.total_pages, page);
+            if (page === 1) prev.style.display = 'none';
+            next.style.display = 'block';
+          }
         });
 
-        nextBtn.addEventListener('click', async () => {
+        next.addEventListener('click', async () => {
           page = page + 1;
           const nextPage = await fetchResponseSearch(tipedInput, page);
-
+          lastPage = nextPage.total_pages;
           addFilms(nextPage);
           changePage(nextPage.total_pages, page);
+          if (page === nextPage.total_pages) next.style.display = 'none';
+          prev.style.display = 'block';
         });
-        pagination.removeEventListener('submit', {});
       }
+      pagination.removeEventListener('submit', {});
+      next.removeEventListener('submit', {});
+      prev.removeEventListener('submit', {});
     });
   } catch (error) {
     console.log(error.message);
   }
 });
 
-pagination.removeEventListener('submit', {});
-nextBtn.removeEventListener('submit', {});
-prevBtn.removeEventListener('submit', {});
 
 fetchResponseTrend(page).then(popularMovies => {
   addFilms(popularMovies);
   changePage(popularMovies.total_pages, page);
 
   pagination.addEventListener('click', async event => {
-    page = Number(event.target.textContent);
+    if (isNaN(event.target.textContent)) return;
+    else {
+      page = Number(event.target.textContent);
 
-    const nextPage = await fetchResponseTrend(page);
+      const nextPage = await fetchResponseTrend(page);
 
-    addFilms(nextPage);
-    changePage(nextPage.total_pages, page);
+      addFilms(nextPage);
+      changePage(nextPage.total_pages, page);
+
+      if (page == 1) prev.style.display = 'none';
+      else prev.style.display = 'block';
+
+      if (page == nextPage.total_pages) next.style.display = 'none';
+      else next.style.display = 'block';
+    }
   });
 
-  prevBtn.addEventListener('click', async () => {
-    page = page - 1;
-    const nextPage = await fetchResponseTrend(page);
-
-    addFilms(nextPage);
-    changePage(nextPage.total_pages, page);
+  prev.addEventListener('click', async () => {
+    if (page > 1) {
+      page = page - 1;
+      const nextPage = await fetchResponseTrend(page);
+      addFilms(nextPage);
+      changePage(nextPage.total_pages, page);
+      if (page === 1) prev.style.display = 'none';
+      next.style.display = 'block';
+    }
   });
 
-  nextBtn.addEventListener('click', async () => {
+  next.addEventListener('click', async () => {
     page = page + 1;
     const nextPage = await fetchResponseTrend(page);
-
+    lastPage = nextPage.total_pages;
     addFilms(nextPage);
     changePage(nextPage.total_pages, page);
+    if (page === nextPage.total_pages) next.style.display = 'none';
+    prev.style.display = 'block';
   });
+  pagination.removeEventListener('submit', {});
+  next.removeEventListener('submit', {});
+  prev.removeEventListener('submit', {});
 });
-
-pagination.removeEventListener('submit', {});
-nextBtn.removeEventListener('submit', {});
-prevBtn.removeEventListener('submit', {});
