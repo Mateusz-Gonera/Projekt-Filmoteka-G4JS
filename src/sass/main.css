@@ -452,13 +452,19 @@ header {
   background-color: #FF6B08;
 }
 
-li.dots {
+li.dots,
+li.num-first,
+li.num-last {
   display: none;
 }
 
 @media screen and (min-width: 480px) {
-  li.dots {
-    display: block;
+  li.dots,
+  li.num-first,
+  li.num-last {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
   }
 }
 

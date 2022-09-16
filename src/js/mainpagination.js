@@ -24,71 +24,77 @@ let page = 1;
 function changePage(totalPages, page) {
   let liTag = '';
   let activeLi;
-  let beforePages = page - 1;
-  let afterPages = page + 1;
+  let beforePages = page - 2;
+  let afterPages = page + 2;
   pagination.innerHTML = '';
 
-  // if (page > 1) {
-  //   liTag += `<li class="btn prev pagination__item" data-page=${
-  //     page - 1
-  //   }"><span>&#8592</span></li>`;
-  // }
-
-  if (page > 2) {
-    liTag += `<li class="num-first pagination__item" data-page=1"><span>1</span></li>`;
-    if (page > 3) {
-      liTag += `<li class="dots"><span>...</span></li>`;
+  if (totalPages < 7) {
+    for (let i = 1; i <= totalPages; i++) {
+      if (page === i) {
+        activeLi = 'btn__active';
+      } else {
+        activeLi = '';
+      }
+      liTag += `<li class="num ${activeLi} pagination__item"><span>${i}</span></li>`;
     }
-  }
-
-  if (page === totalPages) {
-    beforePages = beforePages - 2;
-  } else if (page === totalPages - 1) {
-    beforePages = beforePages - 1;
-  }
-
-  if (page === 1) {
-    afterPages = afterPages + 2;
-  } else if (page === 2) {
-    afterPages = afterPages + 1;
-  }
-
-  for (let pageLength = beforePages; pageLength <= afterPages; pageLength++) {
-    if (pageLength > totalPages) {
-      continue;
+  } else {
+    if (page > 2) {
+      liTag += `<li class="num-first pagination__item"><span>1</span></li>`;
+      if (page > 4) {
+        liTag += `<li class="dots"><span>...</span></li>`;
+      }
     }
-    if (pageLength === 0) {
-      pageLength++;
-    }
-    if (page === pageLength) {
-      activeLi = 'btn__active';
-    } else {
-      activeLi = '';
-    }
-    liTag += `<li class="num ${activeLi} pagination__item" data-page=${pageLength}"><span>${pageLength}</span></li>`;
-  }
+    if (totalPages > 5) {
+      if (page === totalPages) {
+        beforePages = beforePages - 2;
+      }
+      if (page === totalPages - 1) {
+        beforePages = beforePages - 1;
+      }
+      if (page === totalPages - 2) {
+        beforePages = beforePages - 1;
+        afterPages = afterPages - 1;
+      }
 
-  if (page < totalPages - 1) {
-    if (page < totalPages - 3) {
-      liTag += `<li class="dots"><span>...</span></li>`;
+      if (page === 1) {
+        afterPages = afterPages + 2;
+        beforePages = beforePages + 1;
+      }
+      if (page === 2) {
+        afterPages = afterPages + 1;
+      }
+      if (page === 3) {
+        afterPages = afterPages + 1;
+        beforePages = beforePages + 1;
+      }
     }
-    liTag += `<li class="num-last pagination__item" data-page=${totalPages}"><span>${totalPages}</span></li>`;
-  }
 
-  // if (page < totalPages) {
-  //   liTag += `<li class="btn next pagination__item" data-page=${
-  //     page + 1
-  //   }"><span>&#8594</span></li>`;
-  // }
+    for (let pageLength = beforePages; pageLength <= afterPages; pageLength++) {
+      if (pageLength > totalPages) {
+        continue;
+      }
+      if (pageLength === 0) {
+        pageLength++;
+      }
+      if (page === pageLength) {
+        activeLi = 'btn__active';
+      } else {
+        activeLi = '';
+      }
+      liTag += `<li class="num ${activeLi} pagination__item"><span>${pageLength}</span></li>`;
+    }
 
-  if (totalPages === 1) {
-    liTag = `<li class="btn prev"><span>&#8592</span></li>
-          <li class="num active"><span>1</span></li>
-          <li class="btn next"><span>&#8594</span></li>`;
+    if (page < totalPages - 1) {
+      if (page < totalPages - 3) {
+        liTag += `<li class="dots"><span>...</span></li>`;
+      }
+      liTag += `<li class="num-last pagination__item"><span>${totalPages}</span></li>`;
+    }
   }
 
   pagination.innerHTML = liTag;
 }
+
 
 const addFilms = films => {
   const movies = films.results;
@@ -122,38 +128,6 @@ const addFilms = films => {
   // addGenres();
 };
 
-fetchResponseTrend(page).then(popularMovies => {
-  addFilms(popularMovies);
-  changePage(popularMovies.total_pages, page);
-
-  pagination.addEventListener('click', async event => {
-    page = Number(event.target.textContent);
-
-    const nextPage = await fetchResponseTrend(page);
-
-    addFilms(nextPage);
-    changePage(nextPage.total_pages, page);
-  });
-
-  prevBtn.addEventListener('click', async () => {
-    page = page - 1;
-    const nextPage = await fetchResponseTrend(page);
-
-    addFilms(nextPage);
-    changePage(nextPage.total_pages, page);
-  });
-
-  nextBtn.addEventListener('click', async () => {
-    page = page + 1;
-    const nextPage = await fetchResponseTrend(page);
-
-    addFilms(nextPage);
-    changePage(nextPage.total_pages, page);
-  });
-});
-
-pagination.removeEventListener('submit', {});
-
 form.addEventListener('submit', e => {
   let tipedInput = input.value.trim();
   e.preventDefault();
@@ -170,20 +144,6 @@ form.addEventListener('submit', e => {
 
         filmList.innerHTML = '';
         pagination.innerHTML = '';
-        // return fetchResponseTrend(page).then(films => {
-        //   addFilms(films);
-        //   changePage(films.total_pages, page);
-
-        //   pagination.addEventListener('click', async event => {
-        //     page = Number(event.target.textContent);
-
-        //     const nextPage = await fetchResponseTrend(page);
-
-        //     addFilms(nextPage);
-        //     changePage(nextPage.total_pages, page);
-        //   });
-        //   pagination.removeEventListener('submit', {});
-        // });
       }
 
       if (movies.total_results > 0) {
@@ -222,3 +182,41 @@ form.addEventListener('submit', e => {
     console.log(error.message);
   }
 });
+
+pagination.removeEventListener('submit', {});
+nextBtn.removeEventListener('submit', {});
+prevBtn.removeEventListener('submit', {});
+
+fetchResponseTrend(page).then(popularMovies => {
+  addFilms(popularMovies);
+  changePage(popularMovies.total_pages, page);
+
+  pagination.addEventListener('click', async event => {
+    page = Number(event.target.textContent);
+
+    const nextPage = await fetchResponseTrend(page);
+
+    addFilms(nextPage);
+    changePage(nextPage.total_pages, page);
+  });
+
+  prevBtn.addEventListener('click', async () => {
+    page = page - 1;
+    const nextPage = await fetchResponseTrend(page);
+
+    addFilms(nextPage);
+    changePage(nextPage.total_pages, page);
+  });
+
+  nextBtn.addEventListener('click', async () => {
+    page = page + 1;
+    const nextPage = await fetchResponseTrend(page);
+
+    addFilms(nextPage);
+    changePage(nextPage.total_pages, page);
+  });
+});
+
+pagination.removeEventListener('submit', {});
+nextBtn.removeEventListener('submit', {});
+prevBtn.removeEventListener('submit', {});
