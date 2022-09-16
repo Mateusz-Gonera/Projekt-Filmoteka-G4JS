@@ -1,3 +1,4 @@
+
 .footer {
     &__container {
         display: flex;
@@ -8,15 +9,66 @@
         padding: 28px;
         background-color: #f7f7f7;
     }
-  
+
 
 }
-@media screen and (min-width: 768px){
-    .footer{
-        &__container{
+
+@media screen and (min-width: 768px) {
+    .footer {
+        &__container {
             flex-direction: row;
             justify-content: center;
             height: 77px;
         }
+    }
+}
+
+// Paginacja
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin: 40px auto;
+  
+
+    &__list {
+        display: flex;
+
+        &>li {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 5px;
+            margin-right: 3px;
+            width: 40px;
+            height: 40px;
+            transition: color $transitionEffect, background-color $transitionEffect;
+            cursor: pointer;
+
+            &:hover {
+                background-color: $mainColor;
+                color: $secondaryFontColor;
+            }
+        }
+
+    }
+
+}
+
+.btn {
+    background-color: #f7f7f7;
+
+    &__active {
+        color: $secondaryFontColor;
+        background-color: $mainColor;
+    }
+}
+
+li.dots {
+    display: none;
+}
+
+@media screen and (min-width: 480px) {
+    li.dots {
+        display: block;
     }
 }
