@@ -126,6 +126,13 @@ const addFilms = films => {
   // addGenres();
 };
 
+const scrollup = () => {
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: 'smooth',
+  });
+};
 
 form.addEventListener('submit', e => {
   let tipedInput = input.value.trim();
@@ -153,7 +160,7 @@ form.addEventListener('submit', e => {
             page = Number(event.target.textContent);
 
             const nextPage = await fetchResponseSearch(tipedInput, page);
-
+            scrollup();
             addFilms(nextPage);
             changePage(nextPage.total_pages, page);
 
@@ -169,6 +176,7 @@ form.addEventListener('submit', e => {
           if (page > 1) {
             page = page - 1;
             const nextPage = await fetchResponseSearch(tipedInput, page);
+            scrollup();
             addFilms(nextPage);
             changePage(nextPage.total_pages, page);
             if (page === 1) prev.style.display = 'none';
@@ -179,22 +187,18 @@ form.addEventListener('submit', e => {
         next.addEventListener('click', async () => {
           page = page + 1;
           const nextPage = await fetchResponseSearch(tipedInput, page);
-          lastPage = nextPage.total_pages;
+          scrollup();
           addFilms(nextPage);
           changePage(nextPage.total_pages, page);
           if (page === nextPage.total_pages) next.style.display = 'none';
           prev.style.display = 'block';
         });
       }
-      pagination.removeEventListener('submit', {});
-      next.removeEventListener('submit', {});
-      prev.removeEventListener('submit', {});
     });
   } catch (error) {
     console.log(error.message);
   }
 });
-
 
 fetchResponseTrend(page).then(popularMovies => {
   addFilms(popularMovies);
@@ -206,7 +210,7 @@ fetchResponseTrend(page).then(popularMovies => {
       page = Number(event.target.textContent);
 
       const nextPage = await fetchResponseTrend(page);
-
+      scrollup();
       addFilms(nextPage);
       changePage(nextPage.total_pages, page);
 
@@ -222,6 +226,7 @@ fetchResponseTrend(page).then(popularMovies => {
     if (page > 1) {
       page = page - 1;
       const nextPage = await fetchResponseTrend(page);
+      scrollup();
       addFilms(nextPage);
       changePage(nextPage.total_pages, page);
       if (page === 1) prev.style.display = 'none';
@@ -232,13 +237,13 @@ fetchResponseTrend(page).then(popularMovies => {
   next.addEventListener('click', async () => {
     page = page + 1;
     const nextPage = await fetchResponseTrend(page);
-    lastPage = nextPage.total_pages;
+    scrollup();
     addFilms(nextPage);
     changePage(nextPage.total_pages, page);
     if (page === nextPage.total_pages) next.style.display = 'none';
     prev.style.display = 'block';
   });
-  pagination.removeEventListener('submit', {});
-  next.removeEventListener('submit', {});
-  prev.removeEventListener('submit', {});
 });
+pagination.removeEventListener('submit', {});
+next.removeEventListener('submit', {});
+prev.removeEventListener('submit', {});
