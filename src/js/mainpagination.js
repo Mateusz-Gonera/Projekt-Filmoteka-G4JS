@@ -114,16 +114,16 @@ const addFilms = films => {
     .join('');
   filmList.innerHTML = markup;
 
-  // const filmGenre = document.querySelectorAll('.film-genre');
+  const filmGenre = document.querySelectorAll('.film-genre');
 
-  // const addGenres = async () => {
-  //   const genreId = movies.map(film => film.genre_ids);
-  //   for (let i = 0; i <= filmGenre.length; i++) {
-  //     const add = await getGenreNames(genreId[i]);
-  //     filmGenre[i].innerHTML = add;
-  //   }
-  // };
-  // addGenres();
+  const addGenres = async () => {
+    const genreId = movies.map(film => film.genre_ids);
+    for (let i = 0; i <= filmGenre.length; i++) {
+      const add = await getGenreNames(genreId[i]);
+      filmGenre[i].innerHTML = add;
+    }
+  };
+  addGenres();
 };
 
 const scrollup = () => {
