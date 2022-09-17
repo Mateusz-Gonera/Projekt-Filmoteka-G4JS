@@ -61,7 +61,7 @@ function changePage(totalPages, page) {
       pageLength++;
     }
     if (page === pageLength) {
-      activeLi = 'active';
+      activeLi = 'btn__active';
     } else {
       activeLi = '';
     }
@@ -90,12 +90,34 @@ function changePage(totalPages, page) {
   pagination.innerHTML = liTag;
 }
 
+const modalPicture = document.querySelector('.modal__img-picture');
+const modalTitle = document.querySelector('.modal__head');
+const modalRating = document.querySelector('.modal__rating');
+const modalVotes = document.querySelector('.modal__votes-number');
+const modalPopularity = document.querySelector('.modal__popularity-total');
+const modalOriginalTitle = document.querySelector('.modal__title-original');
+const modalGenre = document.querySelector('.modal__genre-description');
+const modalDescription = document.querySelector('.modal__text');
+const modalBtnWatched = document.querySelector('.modal__button-watched');
+const modalBtnQueued = document.querySelector('.modal__button-queue');
+
+const ChangeFilmInfo = async film => {
+  modalPicture.src = `https://image.tmdb.org/t/p/w400/${film.poster_path}`;
+  modalTitle.innerHTML = `${film.title}`;
+  modalRating.innerHTML = `${film.vote_average.toFixed(1)}`;
+  modalVotes.innerHTML = `${film.vote_count}`;
+  modalPopularity.innerHTML = `${film.popularity.toFixed(1)}`;
+  modalOriginalTitle.innerHTML = `${film.original_title}`;
+  modalGenre.innerHTML = `${film.genres.map(genre => genre.name).join(', ')}`;
+  modalDescription.innerHTML = `${film.overview}`;
+};
+
 const addFilms = films => {
   const movies = films.results;
   const markup = movies
     .map(
       film =>
-        `<div class="single-film">
+        `<div class="single-film" data-id="${film.id}" data-modal-open>
             <img class="film-image" src="https://image.tmdb.org/t/p/w400/${film.poster_path}"
                 alt="${film.title}">
             <div class="film-info">
@@ -109,6 +131,48 @@ const addFilms = films => {
     )
     .join('');
   filmList.innerHTML = markup;
+
+  const filmArray = document.querySelectorAll('.single-film');
+  filmArray.forEach(film => {
+    film.addEventListener('click', async e => {
+      e.preventDefault();
+      const filmId = e.target.dataset.id;
+      const filmData = await fetchResponseDetails(filmId);
+      ChangeFilmInfo(filmData);
+
+      modalBtnWatched.addEventListener('click', () => {
+        localStorage.setItem('Wathced films', filmId);
+        // refs.modal.classList.add('is-hidden');
+      });
+
+      modalBtnQueued.addEventListener('click', () => {
+        localStorage.setItem('Queued films', filmId);
+        // refs.modal.classList.add('is-hidden');
+      });
+    });
+  });
+
+  (() => {
+    const refs = {
+      openModalBtn: document.querySelectorAll('[data-modal-open]'),
+      closeModalBtn: document.querySelector('[data-modal-close]'),
+      modal: document.querySelector('[data-modal]'),
+    };
+    refs.openModalBtn.forEach(open =>
+      open.addEventListener('click', toggleModal)
+    );
+    refs.closeModalBtn.addEventListener('click', toggleModal);
+    function toggleModal() {
+      refs.modal.classList.toggle('is-hidden');
+    }
+    if (!refs.modal.classList.contains('is-hidden')) {
+      document.addEventListener('keydown', e => {
+        if (e.key == 'Escape') {
+          refs.modal.classList.add('is-hidden');
+        }
+      });
+    }
+  })();
 
   // const filmGenre = document.querySelectorAll('.film-genre');
 
@@ -126,13 +190,11 @@ const addFilms = films => {
 //   page = Number(e.target.dataset.page)
 // });
 
-
 fetchResponseTrend(page).then(popularMovies => {
   addFilms(popularMovies);
   changePage(popularMovies.total_pages, page);
 
   pagination.addEventListener('click', async event => {
-
     page = Number(event.target.textContent);
     // console.log(event.target.dataset.page);
 
