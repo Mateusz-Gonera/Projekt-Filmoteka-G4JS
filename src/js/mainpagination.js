@@ -36,8 +36,6 @@ const modalBtnQueued = document.querySelector('.modal__button-queue');
 
 let watchedFilmsStorage = [];
 let queuedFilmsStorage = [];
-localStorage.setItem('Wathced films', JSON.stringify(watchedFilmsStorage));
-localStorage.setItem('Queued films', JSON.stringify(queuedFilmsStorage));
 
 function changePage(totalPages, page) {
   let liTag = '';
@@ -357,3 +355,4 @@ form.addEventListener('submit', e => {
     console.log(error.message);
   }
 });
+// localStorage.clear()
