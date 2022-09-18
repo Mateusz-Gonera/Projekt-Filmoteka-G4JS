@@ -154,23 +154,26 @@ const addFilms = films => {
       ChangeFilmInfo(filmData);
 
       modalBtnWatched.addEventListener('click', () => {
-        watchedFilmsStorage
-          .push({
-            id: filmData.id,
-            poster_path: filmData.poster_path,
-            title: filmData.title,
-            release_date: filmData.release_date,
-            vote_average: filmData.vote_average,
-            vote_count: filmData.vote_count,
-            popularity: filmData.popularity,
-            original_title: filmData.original_title,
-            genres: filmData.genres,
-            overview: filmData.overview,
-          });
-        localStorage.setItem(
-          'Wathced films',
-          JSON.stringify(watchedFilmsStorage)
-        );
+        watchedFilmsStorage.push({
+          id: filmData.id,
+          poster_path: filmData.poster_path,
+          title: filmData.title,
+          release_date: filmData.release_date,
+          vote_average: filmData.vote_average,
+          vote_count: filmData.vote_count,
+          popularity: filmData.popularity,
+          original_title: filmData.original_title,
+          genres: filmData.genres,
+          overview: filmData.overview,
+        });
+        const key = 'id';
+        const arrayUniqueByKey = [
+          ...new Map(
+            watchedFilmsStorage.map(item => [item[key], item])
+          ).values(),
+        ];
+
+        localStorage.setItem('Wathced films', JSON.stringify(arrayUniqueByKey));
       });
 
       modalBtnQueued.addEventListener('click', () => {
@@ -186,10 +189,13 @@ const addFilms = films => {
           genres: filmData.genres,
           overview: filmData.overview,
         });
-        localStorage.setItem(
-          'Queued films',
-          JSON.stringify(queuedFilmsStorage)
-        );
+        const key = 'id';
+        const arrayUniqueByKey = [
+          ...new Map(
+            queuedFilmsStorage.map(item => [item[key], item])
+          ).values(),
+        ];
+        localStorage.setItem('Queued films', JSON.stringify(arrayUniqueByKey));
       });
     });
   });
