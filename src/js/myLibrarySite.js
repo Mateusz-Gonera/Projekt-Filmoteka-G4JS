@@ -4,4 +4,4 @@ import { fetchResponseTrend, fetchResponseSearch, fetchResponseDetails, getGenre
 
 
 
-SPRAWDZMY CZY DZIALA
+console.log("czesc")
