@@ -236,17 +236,6 @@ header {
   }
 }
 
-.backdrop {
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background: #000;
-  opacity: 0.25;
-  -webkit-transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-
 .is-hidden {
   opacity: 0;
   visibility: visible;
