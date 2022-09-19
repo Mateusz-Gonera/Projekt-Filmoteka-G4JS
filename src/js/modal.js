@@ -241,6 +241,13 @@ const divideResultToPages = (array, page) => {
 };
 
 const firstEntry = () => {
+  if (parsedWatched === null) {
+    filmList.innerHTML = '';
+    pagination.innerHTML = '';
+    next.style.display = 'none';
+    prev.style.display = 'none';
+    return
+  }
   addFilms(divideResultToPages(parsedWatched, page));
   changePage(Math.ceil(parsedWatched.length / 20), page);
 
@@ -287,58 +294,16 @@ const firstEntry = () => {
 
 firstEntry();
 
-watchedButton.addEventListener('click', e => {
-  e.preventDefault;
-  page = 1;
-  addFilms(divideResultToPages(parsedWatched, page));
-  changePage(Math.ceil(parsedWatched.length / 20), page);
-  watchedButton.classList.add('current-page');
-  queueButton.classList.remove('current-page');
-
-  pagination.addEventListener('click', event => {
-    if (isNaN(event.target.textContent)) return;
-    else {
-      page = Number(event.target.textContent);
-
-      const nextPage = divideResultToPages(parsedWatched, page);
-      scrollup();
-      addFilms(nextPage);
-      changePage(Math.ceil(parsedWatched.length / 20), page);
-
-      if (page == 1) prev.style.display = 'none';
-      else prev.style.display = 'block';
-
-      if (page == nextPage.total_pages) next.style.display = 'none';
-      else next.style.display = 'block';
-    }
-  });
-
-  if (page > 1) {
-    prev.addEventListener('click', () => {
-      page = page - 1;
-      const nextPage = divideResultToPages(parsedWatched, page);
-      scrollup();
-      addFilms(nextPage);
-      changePage(Math.ceil(parsedWatched.length / 20), page);
-      if (page === 1) prev.style.display = 'none';
-      next.style.display = 'block';
-    });
-  }
-
-  next.addEventListener('click', () => {
-    page = page + 1;
-    const nextPage = divideResultToPages(parsedWatched, page);
-    scrollup();
-    addFilms(nextPage);
-    changePage(Math.ceil(parsedWatched.length / 20), page);
-    if (page === nextPage.total_pages) next.style.display = 'none';
-    prev.style.display = 'block';
-  });
-});
-
 queueButton.addEventListener('click', e => {
   e.preventDefault;
   page = 1;
+  if (parsedQueued === null) {
+    filmList.innerHTML = '';
+    pagination.innerHTML = '';
+    next.style.display = 'none';
+    prev.style.display = 'none';
+    return
+  }
   addFilms(divideResultToPages(parsedQueued, page));
   changePage(Math.ceil(parsedQueued.length / 20), page);
   watchedButton.classList.remove('current-page');
@@ -380,6 +345,62 @@ queueButton.addEventListener('click', e => {
     scrollup();
     addFilms(nextPage);
     changePage(Math.ceil(parsedQueued.length / 20), page);
+    if (page === nextPage.total_pages) next.style.display = 'none';
+    prev.style.display = 'block';
+  });
+});
+
+watchedButton.addEventListener('click', e => {
+  e.preventDefault;
+  page = 1;
+  if (parsedWatched === null) {
+    filmList.innerHTML = '';
+    pagination.innerHTML = '';
+    next.style.display = 'none';
+    prev.style.display = 'none';
+    return
+  }
+  addFilms(divideResultToPages(parsedWatched, page));
+  changePage(Math.ceil(parsedWatched.length / 20), page);
+  watchedButton.classList.add('current-page');
+  queueButton.classList.remove('current-page');
+
+  pagination.addEventListener('click', event => {
+    if (isNaN(event.target.textContent)) return;
+    else {
+      page = Number(event.target.textContent);
+
+      const nextPage = divideResultToPages(parsedWatched, page);
+      scrollup();
+      addFilms(nextPage);
+      changePage(Math.ceil(parsedWatched.length / 20), page);
+
+      if (page == 1) prev.style.display = 'none';
+      else prev.style.display = 'block';
+
+      if (page == nextPage.total_pages) next.style.display = 'none';
+      else next.style.display = 'block';
+    }
+  });
+
+  if (page > 1) {
+    prev.addEventListener('click', () => {
+      page = page - 1;
+      const nextPage = divideResultToPages(parsedWatched, page);
+      scrollup();
+      addFilms(nextPage);
+      changePage(Math.ceil(parsedWatched.length / 20), page);
+      if (page === 1) prev.style.display = 'none';
+      next.style.display = 'block';
+    });
+  }
+
+  next.addEventListener('click', () => {
+    page = page + 1;
+    const nextPage = divideResultToPages(parsedWatched, page);
+    scrollup();
+    addFilms(nextPage);
+    changePage(Math.ceil(parsedWatched.length / 20), page);
     if (page === nextPage.total_pages) next.style.display = 'none';
     prev.style.display = 'block';
   });
