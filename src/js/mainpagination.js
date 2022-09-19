@@ -7,8 +7,6 @@ import {
   getGenreNames,
 } from './fetchResponse';
 
-export { changePage, addFilms, ChangeFilmInfo, scrollup };
-
 //======= PAGINATION / SEARCH =======//
 const pagination = document.querySelector('.pagination__list');
 const form = document.querySelector('.search__form');
@@ -36,8 +34,6 @@ const modalBtnQueued = document.querySelector('.modal__button-queue');
 
 let watchedFilmsStorage = [];
 let queuedFilmsStorage = [];
-localStorage.setItem('Wathced films', JSON.stringify(watchedFilmsStorage));
-localStorage.setItem('Queued films', JSON.stringify(queuedFilmsStorage));
 
 function changePage(totalPages, page) {
   let liTag = '';
@@ -166,14 +162,14 @@ const addFilms = films => {
           genres: filmData.genres,
           overview: filmData.overview,
         });
-        const key = 'id';
-        const arrayUniqueByKey = [
+        const watch = 'id';
+        const watchUniqueByKey = [
           ...new Map(
-            watchedFilmsStorage.map(item => [item[key], item])
+            watchedFilmsStorage.map(item => [item[watch], item])
           ).values(),
         ];
 
-        localStorage.setItem('Wathced films', JSON.stringify(arrayUniqueByKey));
+        localStorage.setItem('Watched films', JSON.stringify(watchUniqueByKey));
       });
 
       modalBtnQueued.addEventListener('click', () => {
@@ -189,13 +185,13 @@ const addFilms = films => {
           genres: filmData.genres,
           overview: filmData.overview,
         });
-        const key = 'id';
-        const arrayUniqueByKey = [
+        const queue = 'id';
+        const queueUniqueByKey = [
           ...new Map(
-            queuedFilmsStorage.map(item => [item[key], item])
+            queuedFilmsStorage.map(item => [item[queue], item])
           ).values(),
         ];
-        localStorage.setItem('Queued films', JSON.stringify(arrayUniqueByKey));
+        localStorage.setItem('Queued films', JSON.stringify(queueUniqueByKey));
       });
     });
   });
@@ -305,6 +301,8 @@ form.addEventListener('submit', e => {
 
         filmList.innerHTML = '';
         pagination.innerHTML = '';
+        next.style.display = 'none';
+        prev.style.display = 'none';
       }
 
       if (movies.total_results > 0) {

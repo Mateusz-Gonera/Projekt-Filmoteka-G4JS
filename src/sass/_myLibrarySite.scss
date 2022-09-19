@@ -1,33 +1,39 @@
 .myLibrary {
-    &__wrapper {
-        margin-top: 46px;
-        display: flex;
-        justify-content: space-between;
-    }
+  &__wrapper {
+    margin-top: 46px;
+    display: flex;
+    justify-content: space-between;
+  }
 
-    &__button {
-        color: $secondaryFontColor;
-        background-color: transparent;
-        width: 136px;
-        height: 44px;
-        border-radius: 5px;
-        border-color: white;
-        border-style: solid;
-        cursor: pointer;
+  &__button {
+    color: $secondaryFontColor;
+    background-color: transparent;
+    width: 136px;
+    height: 44px;
+    border-radius: 5px;
+    border-color: white;
+    border-style: solid;
+    cursor: pointer;
     &:hover{
-        border-color: $mainColor;
+      border-color: $mainColor;
     }
-    }
+  }
 
 }
 
 @media screen and (min-width: 768px) {
-    .myLibrary {
-        &__wrapper {
-            justify-content: center;
-        }
-        &__button:first-child{
-            margin-right: 15px;
-        }
+  .myLibrary {
+    &__wrapper {
+      justify-content: center;
     }
+        &__button:first-child{
+      margin-right: 15px;
+    }
+  }
+}
+
+.current-page {
+  border-color: $mainColor;
+  background-color: $mainColor;
+  box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
 }
