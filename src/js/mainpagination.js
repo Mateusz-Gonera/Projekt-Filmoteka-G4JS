@@ -144,7 +144,7 @@ const addFilms = films => {
   filmArray.forEach(film => {
     film.addEventListener('click', async e => {
       e.preventDefault();
-      const filmId = e.target.dataset.id;
+      const filmId = film.dataset.id;
       console.log(filmId);
       const filmData = await fetchResponseDetails(filmId);
       ChangeFilmInfo(filmData);
