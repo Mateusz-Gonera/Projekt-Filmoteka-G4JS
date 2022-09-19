@@ -209,16 +209,15 @@ const addFilms = films => {
     function toggleModal() {
       refs.modal.classList.toggle('is-hidden');
     }
-    if (!refs.modal.classList.contains('is-hidden')) {
-      refs.closeModalBtn.addEventListener('click', () => {
+
+    refs.closeModalBtn.addEventListener('click', () => {
+      refs.modal.classList.add('is-hidden');
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
         refs.modal.classList.add('is-hidden');
-      });
-      document.addEventListener('keydown', e => {
-        if (e.key == 'Escape') {
-          refs.modal.classList.add('is-hidden');
-        }
-      });
-    }
+      }
+    });
   })();
 
   const filmGenre = document.querySelectorAll('.film-genre');
