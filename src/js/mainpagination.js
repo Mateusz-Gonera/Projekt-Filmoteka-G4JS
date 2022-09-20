@@ -31,6 +31,7 @@ const modalGenre = document.querySelector('.modal__genre-description');
 const modalDescription = document.querySelector('.modal__text');
 const modalBtnWatched = document.querySelector('.modal__button-watched');
 const modalBtnQueued = document.querySelector('.modal__button-queue');
+const modal = document.querySelector('.backdrop');
 
 let watchedFilmsStorage = [];
 let queuedFilmsStorage = [];
@@ -149,7 +150,7 @@ const addFilms = films => {
       ChangeFilmInfo(filmData);
 
       modalBtnWatched.addEventListener('click', () => {
-        modalBtnWatched.classList.add('btn__active');
+        modal.classList.add('is-hidden');
         watchedFilmsStorage.push({
           id: filmData.id,
           poster_path: filmData.poster_path,
@@ -173,7 +174,7 @@ const addFilms = films => {
       });
 
       modalBtnQueued.addEventListener('click', () => {
-        modalBtnQueued.classList.add('btn__active');
+        modal.classList.add('is-hidden');
         queuedFilmsStorage.push({
           id: filmData.id,
           poster_path: filmData.poster_path,
@@ -210,22 +211,13 @@ const addFilms = films => {
     function toggleModal() {
       refs.modal.classList.toggle('is-hidden');
     }
-    document.addEventListener('click', () => {
-      if (refs.modal.classList.contains('is-hidden')) {
-        modalBtnWatched.classList.remove('btn__active');
-        modalBtnQueued.classList.remove('btn__active');
-      }
-    });
+
     refs.closeModalBtn.addEventListener('click', () => {
       refs.modal.classList.add('is-hidden');
-      modalBtnWatched.classList.remove('btn__active');
-      modalBtnQueued.classList.remove('btn__active');
     });
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') {
         refs.modal.classList.add('is-hidden');
-        modalBtnWatched.classList.remove('btn__active');
-        modalBtnQueued.classList.remove('btn__active');
       }
     });
   })();
