@@ -145,6 +145,15 @@ const addFilms = movies => {
   const filmArray = document.querySelectorAll('.single-film');
   filmArray.forEach(film => {
     film.addEventListener('click', async e => {
+      modalPicture.src = '';
+      modalTitle.innerHTML = '';
+      modalRating.innerHTML = '';
+      modalVotes.innerHTML = '';
+      modalPopularity.innerHTML = '';
+      modalOriginalTitle.innerHTML = '';
+      modalGenre.innerHTML = '';
+      modalDescription.innerHTML = '';
+
       e.preventDefault();
       const filmId = film.dataset.id;
       const filmData = await fetchResponseDetails(filmId);
