@@ -1,3 +1,4 @@
+import Notiflix from 'notiflix';
 import {
   fetchResponseTrend,
   fetchResponseSearch,
@@ -143,12 +144,15 @@ const addFilms = movies => {
   filmArray.forEach(film => {
     film.addEventListener('click', async e => {
       e.preventDefault();
-      const filmId = e.target.dataset.id;
-      console.log(filmId);
+      const filmId = film.dataset.id;
       const filmData = await fetchResponseDetails(filmId);
       ChangeFilmInfo(filmData);
 
       modalBtnWatched.addEventListener('click', () => {
+        // Notiflix.Notify.success(
+        //   `"${filmData.title}" successfully added to your watched list`
+        // );
+        modalBtnWatched.classList.add('btn__active');
         watchedFilmsStorage.push({
           id: filmData.id,
           poster_path: filmData.poster_path,
@@ -172,6 +176,10 @@ const addFilms = movies => {
       });
 
       modalBtnQueued.addEventListener('click', () => {
+        // Notiflix.Notify.success(
+        //   `"${filmData.title}" successfully added to your queue list`
+        // );
+        modalBtnQueued.classList.add('btn__active');
         queuedFilmsStorage.push({
           id: filmData.id,
           poster_path: filmData.poster_path,
@@ -208,16 +216,24 @@ const addFilms = movies => {
     function toggleModal() {
       refs.modal.classList.toggle('is-hidden');
     }
-    if (!refs.modal.classList.contains('is-hidden')) {
-      refs.closeModalBtn.addEventListener('click', () => {
+    document.addEventListener('click', () => {
+      if (refs.modal.classList.contains('is-hidden')) {
+        modalBtnWatched.classList.remove('btn__active');
+        modalBtnQueued.classList.remove('btn__active');
+      }
+    });
+    refs.closeModalBtn.addEventListener('click', () => {
+      refs.modal.classList.add('is-hidden');
+      modalBtnWatched.classList.remove('btn__active');
+      modalBtnQueued.classList.remove('btn__active');
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
         refs.modal.classList.add('is-hidden');
-      });
-      document.addEventListener('keydown', e => {
-        if (e.key == 'Escape') {
-          refs.modal.classList.add('is-hidden');
-        }
-      });
-    }
+        modalBtnWatched.classList.remove('btn__active');
+        modalBtnQueued.classList.remove('btn__active');
+      }
+    });
   })();
 };
 
@@ -246,7 +262,7 @@ const firstEntry = () => {
     pagination.innerHTML = '';
     next.style.display = 'none';
     prev.style.display = 'none';
-    return
+    return;
   }
   addFilms(divideResultToPages(parsedWatched, page));
   changePage(Math.ceil(parsedWatched.length / 20), page);
@@ -302,7 +318,9 @@ queueButton.addEventListener('click', e => {
     pagination.innerHTML = '';
     next.style.display = 'none';
     prev.style.display = 'none';
-    return
+    watchedButton.classList.remove('current-page');
+    queueButton.classList.add('current-page');
+    return;
   }
   addFilms(divideResultToPages(parsedQueued, page));
   changePage(Math.ceil(parsedQueued.length / 20), page);
@@ -358,7 +376,9 @@ watchedButton.addEventListener('click', e => {
     pagination.innerHTML = '';
     next.style.display = 'none';
     prev.style.display = 'none';
-    return
+    watchedButton.classList.add('current-page');
+    queueButton.classList.remove('current-page');
+    return;
   }
   addFilms(divideResultToPages(parsedWatched, page));
   changePage(Math.ceil(parsedWatched.length / 20), page);

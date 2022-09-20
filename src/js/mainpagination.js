@@ -145,11 +145,14 @@ const addFilms = films => {
     film.addEventListener('click', async e => {
       e.preventDefault();
       const filmId = film.dataset.id;
-      console.log(filmId);
       const filmData = await fetchResponseDetails(filmId);
       ChangeFilmInfo(filmData);
 
       modalBtnWatched.addEventListener('click', () => {
+        // Notiflix.Notify.success(
+        //   `${filmData.title} successfully added to your watched list`
+        // );
+        modalBtnWatched.classList.add('btn__active');
         watchedFilmsStorage.push({
           id: filmData.id,
           poster_path: filmData.poster_path,
@@ -173,6 +176,10 @@ const addFilms = films => {
       });
 
       modalBtnQueued.addEventListener('click', () => {
+        // Notiflix.Notify.success(
+        //   `"${filmData.title}" successfully added to your queue list`
+        // );
+        modalBtnQueued.classList.add('btn__active');
         queuedFilmsStorage.push({
           id: filmData.id,
           poster_path: filmData.poster_path,
@@ -209,13 +216,22 @@ const addFilms = films => {
     function toggleModal() {
       refs.modal.classList.toggle('is-hidden');
     }
-
+    document.addEventListener('click', () => {
+      if (refs.modal.classList.contains('is-hidden')) {
+        modalBtnWatched.classList.remove('btn__active');
+        modalBtnQueued.classList.remove('btn__active');
+      }
+    });
     refs.closeModalBtn.addEventListener('click', () => {
       refs.modal.classList.add('is-hidden');
+      modalBtnWatched.classList.remove('btn__active');
+      modalBtnQueued.classList.remove('btn__active');
     });
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') {
         refs.modal.classList.add('is-hidden');
+        modalBtnWatched.classList.remove('btn__active');
+        modalBtnQueued.classList.remove('btn__active');
       }
     });
   })();
@@ -354,4 +370,3 @@ form.addEventListener('submit', e => {
     console.log(error.message);
   }
 });
-// localStorage.clear()
