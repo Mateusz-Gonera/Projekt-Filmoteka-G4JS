@@ -149,9 +149,6 @@ const addFilms = movies => {
       ChangeFilmInfo(filmData);
 
       modalBtnWatched.addEventListener('click', () => {
-        // Notiflix.Notify.success(
-        //   `"${filmData.title}" successfully added to your watched list`
-        // );
         modalBtnWatched.classList.add('btn__active');
         watchedFilmsStorage.push({
           id: filmData.id,
@@ -176,9 +173,6 @@ const addFilms = movies => {
       });
 
       modalBtnQueued.addEventListener('click', () => {
-        // Notiflix.Notify.success(
-        //   `"${filmData.title}" successfully added to your queue list`
-        // );
         modalBtnQueued.classList.add('btn__active');
         queuedFilmsStorage.push({
           id: filmData.id,
@@ -236,6 +230,13 @@ const addFilms = movies => {
     });
   })();
 };
+
+modalBtnWatched.addEventListener('click', () => {
+  Notiflix.Notify.success(`film successfully added to your watched list`);
+});
+modalBtnQueued.addEventListener('click', () => {
+  Notiflix.Notify.success(`film successfully added to your queue list`);
+});
 
 const scrollup = () => {
   window.scrollTo({
