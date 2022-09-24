@@ -101,7 +101,7 @@ a:visited {
   display: flex;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover;
+  background-size: contain;
   background-color: #ffffff;
 }
 
@@ -204,9 +204,9 @@ a:visited {
 }
 
 @media screen and (min-width: 768px) {
-  .header__container {
+  .header__container .container {
     padding-top: 41px;
-    padding-bottom: 37px;
+    padding-bottom: 97px;
   }
   .logo__title {
     display: inline-flex;
