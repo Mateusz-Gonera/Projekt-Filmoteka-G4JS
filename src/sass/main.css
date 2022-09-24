@@ -818,4 +818,25 @@ li.dots {
     opacity: 0.86;
     transition: 500ms cubic-bezier(0.4, 0, 0.2, 1);
   }
+}
+.scroll_top {
+  display: flex;
+  position: fixed;
+  right: 20px;
+  background: #FFFFFF;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s all;
+  z-index: 1;
+  transform: scale(1);
+}
+
+.scroll {
+  fill: #FF6B08;
+}
+
+.scroll_top.active {
+  bottom: 10px;
+  transition: 0.5s all;
+  transform: scale(-1, 1);
 }/*# sourceMappingURL=main.css.map */

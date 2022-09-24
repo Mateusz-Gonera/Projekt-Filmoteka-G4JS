@@ -1,0 +1,21 @@
+.scroll_top {
+    display: flex;
+    position: fixed;
+    right: 20px;
+    background: $secondaryFontColor;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s all;
+    z-index: 1;
+    transform: scale(1)
+}
+
+.scroll {
+    fill: $mainColor;
+}
+
+.scroll_top.active {
+    bottom: 10px;
+    transition: 0.5s all;
+    transform: scale(-1, 1);
+}
