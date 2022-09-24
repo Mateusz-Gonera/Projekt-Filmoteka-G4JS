@@ -119,6 +119,7 @@ header {
 .header__wrapper {
   display: flex;
   align-items: baseline;
+  justify-content: center;
 }
 
 .logo__title {
@@ -456,6 +457,7 @@ li.dots {
 .myLibrary__wrapper {
   margin-top: 46px;
   display: flex;
+  justify-content: center;
 }
 .myLibrary__button {
   color: #FFFFFF;
