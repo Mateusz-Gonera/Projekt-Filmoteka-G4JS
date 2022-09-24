@@ -666,4 +666,59 @@ li.dots {
   100% {
     opacity: 0;
   }
+}
+.single-film {
+  border-radius: 5px;
+  width: 274px;
+  border-radius: 5px;
+}
+
+.film-image {
+  border-radius: 5px;
+}
+
+.film-info {
+  margin-bottom: 20px;
+  padding-top: 10px;
+}
+
+.film-subinfo {
+  display: flex;
+  color: #FF6B08;
+  padding-top: 5px;
+  align-items: center;
+}
+
+.film-title {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  text-transform: uppercase;
+  color: #000000;
+}
+
+.film-genre, .film-year {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.33;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.film-year {
+  padding-left: 5px;
+}
+
+@media screen and (min-width: 1200px) {
+  .single-film {
+    cursor: pointer;
+    box-shadow: none;
+  }
+  .single-film:hover {
+    box-shadow: rgb(255, 127, 0) 0.95px 0.95px 3.6px 0px;
+    border-radius: 5px;
+    scale: 104%;
+    opacity: 0.86;
+    transition: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
 }/*# sourceMappingURL=main.css.map */
