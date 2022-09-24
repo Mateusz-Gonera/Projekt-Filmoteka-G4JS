@@ -822,8 +822,8 @@ li.dots {
 .scroll_top {
   display: flex;
   position: fixed;
-  right: 20px;
-  background: #FFFFFF;
+  right: 110px;
+  background: none;
   border: none;
   cursor: pointer;
   transition: 0.3s all;
@@ -833,10 +833,22 @@ li.dots {
 
 .scroll {
   fill: #FF6B08;
+  width: 25;
+  height: 25;
 }
 
 .scroll_top.active {
   bottom: 10px;
   transition: 0.5s all;
   transform: scale(-1, 1);
+}
+
+@media screen and (min-width: 768px) {
+  .scroll_top {
+    right: 20px;
+  }
+  .scroll {
+    width: 50;
+    height: 50;
+  }
 }/*# sourceMappingURL=main.css.map */
