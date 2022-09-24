@@ -1,3 +1,53 @@
+@media screen and (min-width: 320px) and (max-width: 767px) {
+    .header__container {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+        url(../images/backgrounds/header-bg-mobile@1x.jpg);
+    }
+}
+
+@media screen and (min-device-pixel-ratio: 2) and (min-width: 320px) and (max-width: 767px),
+    screen and (min-resolution: 192dpi) and (min-width: 320px) and (max-width: 767px),
+    screen and (min-resolution: 2dppx) and (min-width: 320px) and (max-width: 767px) {
+    .header__container {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+        url(../images/backgrounds/header-bg-mobile@2x.jpg);
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .header__container {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+        url(../images/backgrounds/header-bg-tablet@1x.jpg);
+
+    @media (min-device-pixel-ratio: 2),
+        (min-resolution: 192dpi),
+        (min-resolution: 2dppx) {
+        background-image: linear-gradient(
+            rgba(0, 0, 0, 0.56),
+            rgba(0, 0, 0, 0.56)
+        ),
+        url(../images/backgrounds/header-bg-tablet@1x.jpg);
+        }
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .header__container {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+        url(../images/backgrounds/header-bg-desktop@1x.jpg);
+
+    @media (min-device-pixel-ratio: 2),
+        (min-resolution: 192dpi),
+        (min-resolution: 2dppx) {
+        background-image: linear-gradient(
+            rgba(0, 0, 0, 0.56),
+            rgba(0, 0, 0, 0.56)
+        ),
+        url(../images/backgrounds/header-bg-desktop@2x.jpg);
+        }
+    }
+}
+
 header {
     background-color: black;
 }
@@ -6,21 +56,15 @@ header {
     &__container {
         padding-top: 45px;
         padding-bottom: 45px;
-        width: 320px;
+        width: 100%;
         height: 230px;
-        background-image: url(../images/backgrounds/background320.png);
         background-color: black;
         color: $secondaryFontColor;
-
-        &--myLibrary {
-            background-image: url(../images/backgrounds/background320.png)
-        }
     }
 
 
     &__wrapper {
         display: flex;
-        justify-content: space-between;
         align-items: baseline;
     }
 }
@@ -38,11 +82,7 @@ header {
         width: 24px;
         height: 24px;
         stroke: #818181;
-
-
-
     }
-
 }
 
 .nav {
@@ -57,6 +97,10 @@ header {
         line-height: 14px;
         transition: color $transitionEffect;
 
+        &:first-child {
+            margin-left: 112px;
+        }
+
         &:not(:first-child) {
             margin-left: 40px;
         }
@@ -65,13 +109,12 @@ header {
         :focus {
             color: $mainColor;
         }
-
     }
-
 }
 
 .search {
     &__form {
+        position: relative;
         display: flex;
         margin: 40px auto auto;
         justify-content: center;
@@ -94,19 +137,10 @@ header {
         }
     }
 
-    &__button {
-        left: 260px;
-        bottom: 20px;
-
-        position: relative;
-        right: 50px;
-
-        background-color: transparent;
-        border: none;
-
-    }
-
     &__icon {
+        position: absolute;
+        top: 0;
+        right: 0;
         width: 12px;
         height: 12px;
         stroke: $secondaryFontColor;
@@ -117,7 +151,6 @@ header {
             cursor: pointer;
         }
     }
-
 }
 
 .active {
@@ -128,40 +161,83 @@ header {
         width: inherit;
         height: 3px;
         background-color: $mainColor;
+    }
+}
 
+@media screen and (min-width: 768px) {
+    .header {
+        &__container {
+            padding-top: 41px;
+            padding-bottom: 37px;
+        }
+    }
+    
+    .logo {
+        &__title {
+            display: inline-flex;
+            padding-left: 10px;
+        }
+
+        &__icon {
+            margin-left: 41px;
+        }
+    }
+    
+    .nav {
+        display: flex;
+        align-items: start;
+        justify-content: center;
+    
+        &__item {
+
+            &:first-child {
+                margin-left: 303px;
+            }
+        }
+    }
+    
+    .search {
+        
+        &__input {
+            width: 336px;
+        }
+    
+        &__icon {
+            position: relative;
+            top: 0;
+            right: 10;
+        }
     }
 }
 
 @media screen and (min-width: 1024px) {
 
-
-
-    .header {
-        &__container {
-            width: auto;
-            max-width: 1024px;
-            background-image: url(../images/backgrounds/background1024.png);
-
-            &--myLibrary {
-                background-image: url(../images/backgrounds/background1024myLibrary.png)
-            }
-        }
-    }
-
     .logo {
-        &__title {
-            display: inline-block;
+
+        &__icon {
+            margin-left: 0px;
         }
     }
+    
+    .nav {
+        display: flex;
+        align-items: start;
+        justify-content: center;
+    
+        &__item {
 
+            &:first-child {
+                margin-left: 564px;
+            }
+        }    
+    }
+    
     .search {
-        &__input {
-            width: 340px;
-        }
-
-        &__button {
-            left: -20px;
-            bottom: 0px;
+    
+        &__icon {
+            position: relative;
+            top: 0;
+            right: 10;
         }
     }
 }
