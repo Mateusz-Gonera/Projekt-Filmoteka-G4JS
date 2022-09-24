@@ -52,6 +52,13 @@ header {
     background-color: black;
 }
 
+.header__container {
+    background-color: black;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
 .header {
     &__container {
         padding-top: 45px;
