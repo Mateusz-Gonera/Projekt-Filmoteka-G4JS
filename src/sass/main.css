@@ -276,7 +276,7 @@ a:visited {
   padding: 48px 20px 40px;
   opacity: 1;
   z-index: 2;
-  overflow: scroll;
+  overflow: auto;
 }
 .modal__close-btn {
   border: none;
