@@ -33,9 +33,6 @@ const modalBtnWatched = document.querySelector('.modal__button-watched');
 const modalBtnQueued = document.querySelector('.modal__button-queue');
 const modal = document.querySelector('.backdrop');
 
-let watchedFilmsStorage = [];
-let queuedFilmsStorage = [];
-
 function changePage(totalPages, page) {
   let liTag = '';
   let activeLi;
@@ -119,7 +116,10 @@ const ChangeFilmInfo = async film => {
   modalOriginalTitle.innerHTML = `${film.original_title}`;
   modalGenre.innerHTML = `${film.genres.map(genre => genre.name).join(', ')}`;
   modalDescription.innerHTML = `${film.overview}`;
+  modalBtnWatched.dataset.id = film.id;
+  modalBtnQueued.dataset.id = film.id;
 };
+
 
 const addFilms = films => {
   const movies = films.results;
@@ -152,58 +152,13 @@ const addFilms = films => {
       modalOriginalTitle.innerHTML = '';
       modalGenre.innerHTML = '';
       modalDescription.innerHTML = '';
-      
+      modalBtnWatched.dataset.id = '';
+      modalBtnQueued.dataset.id = '';
+
       e.preventDefault();
       const filmId = film.dataset.id;
       const filmData = await fetchResponseDetails(filmId);
       ChangeFilmInfo(filmData);
-
-      modalBtnWatched.addEventListener('click', () => {
-        modal.classList.add('is-hidden');
-        watchedFilmsStorage.push({
-          id: filmData.id,
-          poster_path: filmData.poster_path,
-          title: filmData.title,
-          release_date: filmData.release_date,
-          vote_average: filmData.vote_average,
-          vote_count: filmData.vote_count,
-          popularity: filmData.popularity,
-          original_title: filmData.original_title,
-          genres: filmData.genres,
-          overview: filmData.overview,
-        });
-        const watch = 'id';
-        const watchUniqueByKey = [
-          ...new Map(
-            watchedFilmsStorage.map(item => [item[watch], item])
-          ).values(),
-        ];
-
-        localStorage.setItem('Watched films', JSON.stringify(watchUniqueByKey));
-      });
-
-      modalBtnQueued.addEventListener('click', () => {
-        modal.classList.add('is-hidden');
-        queuedFilmsStorage.push({
-          id: filmData.id,
-          poster_path: filmData.poster_path,
-          title: filmData.title,
-          release_date: filmData.release_date,
-          vote_average: filmData.vote_average,
-          vote_count: filmData.vote_count,
-          popularity: filmData.popularity,
-          original_title: filmData.original_title,
-          genres: filmData.genres,
-          overview: filmData.overview,
-        });
-        const queue = 'id';
-        const queueUniqueByKey = [
-          ...new Map(
-            queuedFilmsStorage.map(item => [item[queue], item])
-          ).values(),
-        ];
-        localStorage.setItem('Queued films', JSON.stringify(queueUniqueByKey));
-      });
     });
   });
 
@@ -242,11 +197,70 @@ const addFilms = films => {
   addGenres();
 };
 
-modalBtnWatched.addEventListener('click', () => {
-  Notiflix.Notify.success(`film successfully added to your watched list`);
+if (!localStorage.getItem('Watched')) {
+  localStorage.setItem('Watched', '[]');
+}
+if (!localStorage.getItem('Queued')) {
+  localStorage.setItem('Queued', '[]');
+}
+
+let watchedStorage = JSON.parse(localStorage.getItem('Watched'));
+let queueStorage = JSON.parse(localStorage.getItem('Queued'));
+
+modalBtnWatched.addEventListener('click', async () => {
+  modal.classList.add('is-hidden');
+  const filmId = modalBtnWatched.dataset.id;
+  const filmData = await fetchResponseDetails(filmId);
+  Notiflix.Notify.success(`"${filmData.title}" successfully added to your WATCHED list`);   
+  let clickedFilm = {
+    id: filmData.id,
+    poster_path: filmData.poster_path,
+    title: filmData.title,
+    release_date: filmData.release_date,
+    vote_average: filmData.vote_average,
+    vote_count: filmData.vote_count,
+    popularity: filmData.popularity,
+    original_title: filmData.original_title,
+    genres: filmData.genres,
+    overview: filmData.overview,
+  };
+  if (watchedStorage.length === 0) {
+    watchedStorage.push(clickedFilm);
+  } else {
+    let checkForMatch = watchedStorage.find(added => added.id === filmData.id);
+    if (checkForMatch === undefined) {
+      watchedStorage.push(clickedFilm);
+    }
+  }
+  localStorage.setItem('Watched', JSON.stringify(watchedStorage));
 });
-modalBtnQueued.addEventListener('click', () => {
-  Notiflix.Notify.success(`film successfully added to your queue list`);
+
+modalBtnQueued.addEventListener('click', async () => {
+  modal.classList.add('is-hidden');
+  const filmId = modalBtnQueued.dataset.id;
+  const filmData = await fetchResponseDetails(filmId);
+  Notiflix.Notify.success(`"${filmData.title}" successfully added to your QUEUE list`);  
+  let clickedFilm = {
+    id: filmData.id,
+    poster_path: filmData.poster_path,
+    title: filmData.title,
+    release_date: filmData.release_date,
+    vote_average: filmData.vote_average,
+    vote_count: filmData.vote_count,
+    popularity: filmData.popularity,
+    original_title: filmData.original_title,
+    genres: filmData.genres,
+    overview: filmData.overview,
+  };
+  if (queueStorage.length === 0) {
+    queueStorage.push(clickedFilm);
+  } else {
+    let checkForMatch = queueStorage.find(added => added.id === filmData.id);
+    if (checkForMatch === undefined) {
+      queueStorage.push(clickedFilm);
+    }
+  }
+  localStorage.setItem('Queued', JSON.stringify(queueStorage));
 });
 
 const scrollup = () => {
