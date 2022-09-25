@@ -49,16 +49,17 @@
 }
 
 .header__container--myLibrary {
-  background-color: black;
+  background-color: #fff;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover;
+  background-size: contain;
 }
 
 .myLibrary {
   &__wrapper {
     margin-top: 46px;
     display: flex;
+    justify-content: center;
   }
 
   &__button {
