@@ -902,6 +902,8 @@ li.dots,
   line-height: 1.33;
   text-transform: uppercase;
   color: #000000;
+  word-wrap: break-word;
+  max-width: 200px;
 }
 
 .film-genre,
@@ -911,6 +913,10 @@ li.dots,
   line-height: 1.33;
   letter-spacing: 0em;
   text-align: left;
+}
+
+.film-genre {
+  max-width: 180px;
 }
 
 .film-year {
