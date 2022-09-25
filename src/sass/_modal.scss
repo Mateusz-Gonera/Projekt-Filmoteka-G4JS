@@ -21,12 +21,10 @@
   transform: translate(-50%, -50%);
   border: 1px #000000 solid;
   background-color: #fff;
-  margin: 0 auto;
-  // max-width: 280px;
   padding: 48px 20px 40px;
   opacity: 1;
   z-index: 2;
-  display: flex;
+  overflow: scroll;
 
   &__close-btn {
     border: none;
@@ -36,34 +34,40 @@
     right: 10px;
     cursor: pointer;
     font-size: 25px;
+    font-weight: 500;
   }
 
   &__head {
     margin-top: 30px;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
+    text-transform: uppercase;
   }
 
   &__img {
     min-width: 240px;
-    min-height: 350px;
-    border: 1px solid grey;
 
-    &--picture {
-      display: block;
+    &-picture {
+      border-radius: 5px;
     }
   }
 
   &__list {
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
+    margin: 20px 0;
   }
 
   &__item {
     font-size: 12px;
     line-height: 16px;
     display: flex;
-    margin-bottom: 10px;
     justify-content: space-between;
+
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
   }
 
   &__parameters {
@@ -74,7 +78,7 @@
   }
 
   &__about {
-    margin: 20px auto 10px 0px;
+    margin-bottom: 10px;
     text-transform: uppercase;
     font-weight: 500;
     font-size: 12px;
@@ -90,7 +94,6 @@
   &__button-container {
     margin-top: 21px;
     display: flex;
-    justify-content: space-between;
   }
 
   &__buttons {
@@ -127,5 +130,60 @@
     height: 16px;
     background-color: #f7f7f7;
     border-radius: 5px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .modal {
+    height: 100vh;
+
+    &__button-container {
+      justify-content: space-between;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .modal {
+    min-width: 618px;
+    padding: 40px 30px;
+    display: flex;
+
+    &__head {
+      margin-top: 0;
+    }
+
+    &__img {
+      min-width: 264px;
+      margin-right: 30px;
+    }
+
+    &__button-container {
+      gap: 15px;
+    }
+
+    &__buttons {
+      width: 125px;
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .modal {
+    min-width: 882px;
+    padding: 50px 30px;
+
+    &__head {
+      font-size: 30px;
+      line-height: 35px;
+    }
+
+    &__img {
+      min-width: 396px;
+    }
+
+    &__buttons {
+      width: 136px;
+    }
   }
 }

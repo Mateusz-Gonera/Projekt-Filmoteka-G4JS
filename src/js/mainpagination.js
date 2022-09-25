@@ -53,7 +53,7 @@ function changePage(totalPages, page) {
     if (page > 2) {
       liTag += `<li class="num-first pagination__item"><span>1</span></li>`;
       if (page > 4) {
-        liTag += `<li class="dots"><span>...</span></li>`;
+        liTag += `<li class="dots pagination__item"><span>...</span></li>`;
       }
     }
     if (totalPages > 6) {
@@ -98,7 +98,7 @@ function changePage(totalPages, page) {
 
     if (page < totalPages - 1) {
       if (page < totalPages - 3) {
-        liTag += `<li class="dots"><span>...</span></li>`;
+        liTag += `<li class="dots pagination__item"><span>...</span></li>`;
       }
       liTag += `<li class="num-last pagination__item"><span>${totalPages}</span></li>`;
     }
@@ -286,10 +286,10 @@ fetchResponseTrend(page).then(popularMovies => {
       changePage(nextPage.total_pages, page);
 
       if (page == 1) prev.style.display = 'none';
-      else prev.style.display = 'block';
+      else prev.style.display = 'flex';
 
       if (page == nextPage.total_pages) next.style.display = 'none';
-      else next.style.display = 'block';
+      else next.style.display = 'flex';
     }
   });
 
@@ -301,7 +301,7 @@ fetchResponseTrend(page).then(popularMovies => {
       addFilms(nextPage);
       changePage(nextPage.total_pages, page);
       if (page === 1) prev.style.display = 'none';
-      next.style.display = 'block';
+      next.style.display = 'flex';
     });
   }
 
@@ -312,7 +312,7 @@ fetchResponseTrend(page).then(popularMovies => {
     addFilms(nextPage);
     changePage(nextPage.total_pages, page);
     if (page === nextPage.total_pages) next.style.display = 'none';
-    prev.style.display = 'block';
+    prev.style.display = 'flex';
   });
 });
 pagination.removeEventListener('submit', {});
@@ -352,10 +352,10 @@ form.addEventListener('submit', e => {
             changePage(nextPage.total_pages, page);
 
             if (page == 1) prev.style.display = 'none';
-            else prev.style.display = 'block';
+            else prev.style.display = 'flex';
 
             if (page == nextPage.total_pages) next.style.display = 'none';
-            else next.style.display = 'block';
+            else next.style.display = 'flex';
           }
         });
 
@@ -367,7 +367,7 @@ form.addEventListener('submit', e => {
             addFilms(nextPage);
             changePage(nextPage.total_pages, page);
             if (page === 1) prev.style.display = 'none';
-            next.style.display = 'block';
+            next.style.display = 'flex';
           });
         }
 
@@ -378,7 +378,7 @@ form.addEventListener('submit', e => {
           addFilms(nextPage);
           changePage(nextPage.total_pages, page);
           if (page === nextPage.total_pages) next.style.display = 'none';
-          prev.style.display = 'block';
+          prev.style.display = 'flex';
         });
       }
     });
