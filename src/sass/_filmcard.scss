@@ -1,59 +1,95 @@
 .single-film {
     border-radius: 5px;
-    width: 274px;
-    border-radius: 5px;
-    }
+    margin-right: auto;
+    margin-left: auto;
+}
 
-  .film-image {
+.film-image {
     border-radius: 5px;
-  }
+    width: 280px;
+    height: 400px;
+}
 
-  .film-info {
+.film-info {
     margin-bottom: 20px;
     padding-top: 10px;
-  }
+}
 
-  .film-subinfo {
+.film-subinfo {
     display: flex;
     color: $mainColor;
     padding-top: 5px;
     align-items: center;
-  }
+}
 
-  .film-title {
+.film-title {
     font-weight: 500;
     font-size: 12px;
     line-height: 1.33;
     text-transform: uppercase;
     color: $mainFontColor;
-  }
+}
 
-  .film-genre, .film-year {
+.film-genre,
+.film-year {
     font-size: 12px;
     font-weight: 500;
     line-height: 1.33;
     letter-spacing: 0em;
     text-align: left;
-  }
+}
 
-  .film-year {
+.film-year {
     padding-left: 5px;
-  }
+}
 
-  @media screen and (min-width: 1200px) {
+@media screen and (min-width: 1200px) {
     .single-film {
-      cursor: pointer;
+        cursor: pointer;
 
-      box-shadow:  none;
+        box-shadow: none;
 
-      &:hover {
-        -webkit-box-shadow: 2px 2px 60px 1px rgba(255, 127, 0, 1);
-        -moz-box-shadow: 2px 2px 60px 1px rgba(255, 127, 0, 1);
-        box-shadow:  rgba(255, 127, 0, 1) 0.95px 0.95px 3.6px 0px;
-        border-radius: 5px;
-        scale: 104%;
-        opacity: 0.86;
-        transition:  $transitionEffect;
-      }
+        &:hover {
+            -webkit-box-shadow: 2px 2px 60px 1px rgba(255, 127, 0, 1);
+            -moz-box-shadow: 2px 2px 60px 1px rgba(255, 127, 0, 1);
+            box-shadow: rgba(255, 127, 0, 1) 0.95px 0.95px 3.6px 0px;
+            border-radius: 5px;
+            scale: 104%;
+            opacity: 0.86;
+            transition: $transitionEffect;
+        }
     }
-  }
+}
+
+.film-list {
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (min-width: 768px) {
+    .film-list {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-gap: 30px;
+    }
+
+    .film-image {
+        width: 293px;
+        height: 398px;
+    }
+
+    .single-film {
+        margin-left: 0;
+    }
+
+}
+
+@media screen and (min-width: 1024px) {
+    .film-list {
+        grid-template-columns: auto auto auto;
+    }
+
+    .film-image {
+        width: 274px;
+    }
+}
