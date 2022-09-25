@@ -102,7 +102,7 @@ a:visited {
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
-  background-color: #ffffff;
+  background-color: #000000;
 }
 
 .header__container .container {
@@ -182,9 +182,9 @@ a:visited {
   color: #FFFFFF;
 }
 .search__icon {
-  position: absolute;
+  position: relative;
   top: 0;
-  right: 40vh;
+  right: 10px;
   width: 12px;
   height: 12px;
   stroke: #FFFFFF;
@@ -201,6 +201,17 @@ a:visited {
   width: inherit;
   height: 3px;
   background-color: #FF6B08;
+}
+
+.infoPlace {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 0.875;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #FF001B;
+  padding-top: 20px;
 }
 
 @media screen and (min-width: 768px) {
