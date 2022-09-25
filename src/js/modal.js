@@ -178,6 +178,10 @@ const addFilms = movies => {
       refs.modal.classList.toggle('is-hidden');
     }
 
+    refs.modal.addEventListener('click', () => {
+      refs.modal.classList.add('is-hidden');
+    });
+
     refs.closeModalBtn.addEventListener('click', () => {
       refs.modal.classList.add('is-hidden');
     });
@@ -186,7 +190,10 @@ const addFilms = movies => {
         refs.modal.classList.add('is-hidden');
       }
     });
+    refs.modal.removeEventListener('click', {});
+    refs.closeModalBtn.removeEventListener('click', {});
   })();
+  document.removeEventListener('click', {});
 };
 
 if (!localStorage.getItem('Watched')) {
@@ -203,7 +210,9 @@ modalBtnWatched.addEventListener('click', async () => {
   modal.classList.add('is-hidden');
   const filmId = modalBtnWatched.dataset.id;
   const filmData = await fetchResponseDetails(filmId);
-  Notiflix.Notify.success(`"${filmData.title}" successfully added to your WATCHED list`);
+  Notiflix.Notify.success(
+    `"${filmData.title}" successfully added to your WATCHED list`
+  );
   let clickedFilm = {
     id: filmData.id,
     poster_path: filmData.poster_path,
@@ -231,7 +240,9 @@ modalBtnQueued.addEventListener('click', async () => {
   modal.classList.add('is-hidden');
   const filmId = modalBtnQueued.dataset.id;
   const filmData = await fetchResponseDetails(filmId);
-  Notiflix.Notify.success(`"${filmData.title}" successfully added to your QUEUE list`);
+  Notiflix.Notify.success(
+    `"${filmData.title}" successfully added to your QUEUE list`
+  );
   let clickedFilm = {
     id: filmData.id,
     poster_path: filmData.poster_path,

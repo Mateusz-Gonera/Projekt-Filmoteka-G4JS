@@ -120,14 +120,15 @@ const ChangeFilmInfo = async film => {
   modalBtnQueued.dataset.id = film.id;
 };
 
-
 const addFilms = films => {
   const movies = films.results;
   const markup = movies
     .map(
       film =>
         `<div class="single-film" data-id="${film.id}" data-modal-open>
-            <img class="film-image" src="https://image.tmdb.org/t/p/w400/${film.poster_path}"
+            <img class="film-image" src="https://image.tmdb.org/t/p/w400/${
+              film.poster_path
+            }"
                 alt="${film.title}">
             <div class="film-info">
                 <p class="film-title">${film.title}</p>
@@ -176,6 +177,10 @@ const addFilms = films => {
       refs.modal.classList.toggle('is-hidden');
     }
 
+    refs.modal.addEventListener('click', () => {
+      refs.modal.classList.add('is-hidden');
+    });
+
     refs.closeModalBtn.addEventListener('click', () => {
       refs.modal.classList.add('is-hidden');
     });
@@ -184,7 +189,11 @@ const addFilms = films => {
         refs.modal.classList.add('is-hidden');
       }
     });
+    refs.modal.removeEventListener('click', {});
+    refs.closeModalBtn.removeEventListener('click', {});
   })();
+
+  document.removeEventListener('click', {});
 
   const filmGenre = document.querySelectorAll('.film-genre');
   const addGenres = async () => {
@@ -211,7 +220,9 @@ modalBtnWatched.addEventListener('click', async () => {
   modal.classList.add('is-hidden');
   const filmId = modalBtnWatched.dataset.id;
   const filmData = await fetchResponseDetails(filmId);
-  Notiflix.Notify.success(`"${filmData.title}" successfully added to your WATCHED list`);   
+  Notiflix.Notify.success(
+    `"${filmData.title}" successfully added to your WATCHED list`
+  );
   let clickedFilm = {
     id: filmData.id,
     poster_path: filmData.poster_path,
@@ -239,7 +250,9 @@ modalBtnQueued.addEventListener('click', async () => {
   modal.classList.add('is-hidden');
   const filmId = modalBtnQueued.dataset.id;
   const filmData = await fetchResponseDetails(filmId);
-  Notiflix.Notify.success(`"${filmData.title}" successfully added to your QUEUE list`);  
+  Notiflix.Notify.success(
+    `"${filmData.title}" successfully added to your QUEUE list`
+  );
   let clickedFilm = {
     id: filmData.id,
     poster_path: filmData.poster_path,
