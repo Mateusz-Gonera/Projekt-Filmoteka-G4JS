@@ -889,6 +889,7 @@ li.dots,
 @media screen and (min-width: 1024px) {
   .single-film {
     cursor: pointer;
+    transition: 500ms cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: none;
   }
   .single-film:hover {

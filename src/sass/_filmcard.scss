@@ -45,6 +45,7 @@
   @media screen and (min-width: 1024px) {
     .single-film {
       cursor: pointer;
+      transition: $transitionEffect;
 
       box-shadow:  none;
 
