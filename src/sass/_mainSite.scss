@@ -97,3 +97,9 @@ li.dots,
     padding: 0 76px;
   }
 }
+
+@media screen and (min-width: 1024px) {
+  .main_container {
+    padding: 0;
+  }
+}

@@ -516,6 +516,11 @@ li.dots,
     padding: 0 76px;
   }
 }
+@media screen and (min-width: 1024px) {
+  .main_container {
+    padding: 0;
+  }
+}
 @media screen and (min-width: 320px) and (max-width: 767px) {
   .header__container--myLibrary {
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/backgrounds/header-bg-library-mobile@1x.jpg);
