@@ -133,7 +133,7 @@ const addFilms = films => {
                 <p class="film-title">${film.title}</p>
                 <div class="film-subinfo">
                     <p class="film-genre">Gatunek filmowy</p>
-                    <p>${film.release_date}</p>
+                    <p class="film-year">| ${film.release_date.slice(0, 4)}</p>
                 </div>
             </div>
         </div>`

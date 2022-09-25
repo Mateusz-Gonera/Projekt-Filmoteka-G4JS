@@ -1,167 +1,236 @@
-header {
-    background-color: black;
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .header__container {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url(../images/backgrounds/header-bg-mobile@1x.jpg);
+  }
 }
 
-.header {
-    &__container {
-        padding-top: 45px;
-        padding-bottom: 45px;
-        width: 320px;
-        height: 230px;
-        background-image: url(../images/backgrounds/background320.png);
-        background-color: black;
-        color: $secondaryFontColor;
+@media screen and (min-device-pixel-ratio: 2) and (min-width: 320px) and (max-width: 767px),
+  screen and (min-resolution: 192dpi) and (min-width: 320px) and (max-width: 767px),
+  screen and (min-resolution: 2dppx) and (min-width: 320px) and (max-width: 767px) {
+  .header__container {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url(../images/backgrounds/header-bg-mobile@2x.jpg);
+  }
+}
 
-        &--myLibrary {
-            background-image: url(../images/backgrounds/background320.png)
-        }
+@media screen and (min-width: 768px) {
+  .header__container {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url(../images/backgrounds/header-bg-tablet@1x.jpg);
+
+    @media (min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: linear-gradient(
+          rgba(0, 0, 0, 0.56),
+          rgba(0, 0, 0, 0.56)
+        ),
+        url(../images/backgrounds/header-bg-tablet@1x.jpg);
     }
+  }
+}
 
+@media screen and (min-width: 1024px) {
+  .header__container {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url(../images/backgrounds/header-bg-desktop@1x.jpg);
 
-    &__wrapper {
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
+    @media (min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: linear-gradient(
+          rgba(0, 0, 0, 0.56),
+          rgba(0, 0, 0, 0.56)
+        ),
+        url(../images/backgrounds/header-bg-desktop@2x.jpg);
     }
+  }
+}
+
+.header__container {
+  display: flex;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-color: #ffffff;
+}
+
+.header__container .container {
+  padding-top: 45px;
+  padding-bottom: 45px;
+  height: 230px;
+  color: $secondaryFontColor;
+}
+
+.header__wrapper {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
 }
 
 .logo {
-    &__title {
-        display: none;
-        font-weight: 500;
-        font-size: 30px;
-        line-height: 36px;
-        align-self: center;
-    }
+  &__title {
+    display: none;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 36px;
+    align-self: center;
+  }
 
-    &__icon {
-        width: 24px;
-        height: 24px;
-        stroke: #818181;
-
-
-
-    }
-
+  &__icon {
+    width: 24px;
+    height: 24px;
+    stroke: #818181;
+  }
 }
 
 .nav {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+
+  &__item {
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    transition: color $transitionEffect;
+
+    &:first-child {
+      margin-left: 112px;
+    }
+
+    &:not(:first-child) {
+      margin-left: 40px;
+    }
+
+    &:hover,
+    :focus {
+      color: $mainColor;
+    }
+  }
+}
+
+.search {
+  &__form {
+    position: relative;
+    display: flex;
+    margin: 40px auto auto;
+    justify-content: center;
+  }
+
+  &__input {
+    position: relative;
+    color: $secondaryFontColor;
+    background-color: #00000000;
+    width: 280px;
+    border: none;
+    border-bottom: 0.1px solid #ffffff;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    outline: none;
+
+    &::placeholder {
+      color: $secondaryFontColor;
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    top: 0;
+    right: 40vh;
+    width: 12px;
+    height: 12px;
+    stroke: $secondaryFontColor;
+    transition: stroke $transitionEffect;
+
+    :hover {
+      stroke: $mainColor;
+      cursor: pointer;
+    }
+  }
+}
+
+.active {
+  &::after {
+    display: block;
+    content: '';
+    width: inherit;
+    height: 3px;
+    background-color: $mainColor;
+  }
+}
+
+@media screen and (min-width: 768px) {
+.header__container .container {
+  padding-top: 41px;
+  padding-bottom: 97px;
+}
+
+  
+
+  .logo {
+    &__title {
+      display: inline-flex;
+      padding-left: 10px;
+    }
+
+    &__icon {
+      margin-left: 51px;
+    }
+  }
+
+  .nav {
     display: flex;
     align-items: start;
     justify-content: center;
 
     &__item {
-        text-transform: uppercase;
-        font-weight: 500;
-        font-size: 12px;
-        line-height: 14px;
-        transition: color $transitionEffect;
-
-        &:not(:first-child) {
-            margin-left: 40px;
-        }
-
-        &:hover,
-        :focus {
-            color: $mainColor;
-        }
-
+      &:first-child {
+        margin-left: 303px;
+      }
     }
+  }
 
-}
-
-.search {
-    &__form {
-        display: flex;
-        margin: 40px auto auto;
-        justify-content: center;
-    }
-
+  .search {
     &__input {
-        position: relative;
-        color: $secondaryFontColor;
-        background-color: #00000000;
-        width: 280px;
-        border: none;
-        border-bottom: 0.1px solid #FFFFFF;
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 16px;
-        outline: none;
-
-        &::placeholder {
-            color: $secondaryFontColor;
-        }
-    }
-
-    &__button {
-        left: 260px;
-        bottom: 20px;
-
-        position: relative;
-        right: 50px;
-
-        background-color: transparent;
-        border: none;
-
+      width: 336px;
     }
 
     &__icon {
-        width: 12px;
-        height: 12px;
-        stroke: $secondaryFontColor;
-        transition: stroke $transitionEffect;
-
-        :hover {
-            stroke: $mainColor;
-            cursor: pointer;
-        }
+      position: relative;
+      top: 0;
+      right: 10;
     }
-
-}
-
-.active {
-    &::after {
-
-        display: block;
-        content: "";
-        width: inherit;
-        height: 3px;
-        background-color: $mainColor;
-
-    }
+  }
 }
 
 @media screen and (min-width: 1024px) {
-
-
-
-    .header {
-        &__container {
-            width: auto;
-            max-width: 1024px;
-            background-image: url(../images/backgrounds/background1024.png);
-
-            &--myLibrary {
-                background-image: url(../images/backgrounds/background1024myLibrary.png)
-            }
-        }
+  .logo {
+    &__icon {
+      margin-left: 0px;
     }
+  }
 
-    .logo {
-        &__title {
-            display: inline-block;
-        }
+  .nav {
+    display: flex;
+    align-items: start;
+    justify-content: center;
+
+    &__item {
+      &:first-child {
+        margin-left: 564px;
+      }
     }
+  }
 
-    .search {
-        &__input {
-            width: 340px;
-        }
-
-        &__button {
-            left: -20px;
-            bottom: 0px;
-        }
+  .search {
+    &__icon {
+      position: relative;
+      top: 0;
+      right: 10;
     }
+  }
 }
