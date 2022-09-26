@@ -968,4 +968,46 @@ li.dots,
   .single-film {
     margin-top: 0;
   }
+}
+.scroll_top {
+  display: flex;
+  position: fixed;
+  right: -3px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s all;
+  z-index: 1;
+  transform: scale(1);
+}
+
+.scroll {
+  fill: #FF6B08;
+  width: 15;
+  height: 15;
+}
+
+.scroll_top.active {
+  bottom: 10px;
+  transition: 0.5s all;
+  transform: scale(-1, 1);
+}
+
+@media screen and (min-width: 768px) {
+  .scroll_top {
+    right: 10px;
+  }
+  .scroll {
+    width: 25;
+    height: 25;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .scroll_top {
+    right: 10px;
+  }
+  .scroll {
+    width: 35;
+    height: 35;
+  }
 }/*# sourceMappingURL=main.css.map */
