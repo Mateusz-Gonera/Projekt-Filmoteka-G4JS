@@ -904,7 +904,7 @@ li.dots,
   text-transform: uppercase;
   color: #000000;
   word-wrap: break-word;
-  max-width: 250px;
+  max-width: 266px;
 }
 
 .film-genre,
@@ -917,7 +917,7 @@ li.dots,
 }
 
 .film-genre {
-  max-width: 155px;
+  max-width: 222px;
 }
 
 .film-year {
