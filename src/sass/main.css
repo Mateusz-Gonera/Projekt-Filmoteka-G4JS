@@ -515,6 +515,9 @@ li.dots,
     margin-top: 60px;
     padding: 0 76px;
   }
+  .footer__elements--part2 {
+    padding-left: 3px;
+  }
 }
 @media screen and (min-width: 1024px) {
   .main_container {
