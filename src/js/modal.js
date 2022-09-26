@@ -135,7 +135,7 @@ const addFilms = movies => {
                     <p class="film-genre">${film.genres
                       .map(genre => genre.name)
                       .join(', ')}</p>
-                    <p>${film.release_date}</p>
+                    <p class="film-year">| ${film.release_date.slice(0, 4)}</p>
                 </div>
             </div>
         </div>`
