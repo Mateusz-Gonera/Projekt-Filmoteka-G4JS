@@ -172,7 +172,12 @@
 @media screen and (min-width: 1024px) {
   .modal {
     min-width: 882px;
+    height: 568px;
     padding: 50px 30px;
+
+    &__content {
+      max-width: 396px;
+    }
 
     &__head {
       font-size: 30px;
@@ -180,7 +185,15 @@
     }
 
     &__img {
-      min-width: 396px;
+      display: flex;
+      justify-content: center;
+      width: 396px;
+      max-height: 478px;
+    }
+
+    &__img-picture {
+      width: auto;
+      height: 100%;
     }
 
     &__buttons {
